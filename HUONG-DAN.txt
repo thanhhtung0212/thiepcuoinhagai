@@ -1,0 +1,3 @@
+Giai nen tep ZIP. De gui va hien loi chuc tren may nay, chay start-wishes-server.ps1 roi mo http://127.0.0.1:8765/ (khong mo index.html truc tiep). Loi chuc duoc luu trong wishes/messages.json.
+
+May chu localhost chi truy cap duoc tren may tinh nay. De khach tu xa cung gui va xem loi chuc, dua toan bo project len hosting ho tro PHP va cap quyen ghi cho wishes/messages.json.

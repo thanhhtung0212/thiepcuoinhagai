@@ -1,0 +1,9 @@
+# Local browser profiles, audits, and temporary files
+/tmp/
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+Thumbs.db
+Desktop.ini

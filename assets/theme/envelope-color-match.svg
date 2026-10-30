@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <!-- Match representative paper midtones to RGB(77,85,53), preserving alpha. -->
+  <filter id="closed" color-interpolation-filters="sRGB">
+    <feComponentTransfer>
+      <feFuncR type="linear" slope="1" intercept="-0.003922"/>
+      <feFuncG type="linear" slope="1" intercept="0.027451"/>
+      <feFuncB type="linear" slope="1" intercept="0.023529"/>
+    </feComponentTransfer>
+  </filter>
+  <filter id="open-back" color-interpolation-filters="sRGB">
+    <feComponentTransfer>
+      <feFuncR type="linear" slope="1" intercept="-0.043137"/>
+      <feFuncG type="linear" slope="1" intercept="-0.003922"/>
+      <feFuncB type="linear" slope="1" intercept="-0.035294"/>
+    </feComponentTransfer>
+  </filter>
+  <filter id="open-front" color-interpolation-filters="sRGB">
+    <feComponentTransfer>
+      <feFuncR type="linear" slope="1" intercept="-0.003922"/>
+      <feFuncG type="linear" slope="1" intercept="0.035294"/>
+      <feFuncB type="linear" slope="1" intercept="0.019608"/>
+    </feComponentTransfer>
+  </filter>
+</svg>

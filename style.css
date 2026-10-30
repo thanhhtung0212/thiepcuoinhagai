@@ -1,0 +1,2197 @@
+@font-face{font-family:Cormorant Garamond;src:url("assets/fonts/CormorantGaramond-Variable.ttf") format("truetype-variations");font-weight:100 900;font-display:swap}
+@font-face{font-family:Viaoda Libre;src:url("assets/fonts/ViaodaLibre-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:The Nautigal;src:url("assets/fonts/TheNautigal-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:Uchen;src:url("assets/fonts/Uchen-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:Ms Madi;src:url("assets/fonts/MsMadiAmpersand-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Roboto;src:url("assets/fonts/Roboto-latin.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Roboto;src:url("assets/fonts/Roboto-latin-ext.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Roboto;src:url("assets/fonts/Roboto-vietnamese.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
+:root{--wine:#511419;--wine-deep:#3d0b10;--cream:#fff7eb;--paper:#ece4d8;--muted:rgba(236,228,216,.7);--gold:#c9a24a;--serif:"Cormorant Garamond",Georgia,serif;--baskerville:"Cormorant Garamond",Georgia,serif;--script:"Viaoda Libre","The Nautigal",cursive;--sans:Roboto,Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:18px}
+body{margin:0;min-height:100vh;background:#fff;color:var(--wine);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+.invitation-shell{position:relative;isolation:isolate;width:100%;max-width:480px;margin:0 auto;overflow:hidden;background:var(--cream);color:var(--wine)}
+button,input,select,textarea{font:inherit}button,a{cursor:pointer}button{color:inherit}a{color:inherit}[hidden]{display:none!important}
+.paper-grain{position:absolute;z-index:0;inset:0;pointer-events:none}.paper-grain:before{position:absolute;inset:0;background:url("assets/theme/paper.webp") top center/100% auto repeat-y;mix-blend-mode:multiply;opacity:.5;content:""}
+.cover,#site{position:relative;z-index:1;width:100%;max-width:none;margin:0;overflow:hidden;background:transparent;color:var(--wine)}
+.cover{isolation:isolate;display:flex;flex-direction:column;align-items:center;padding:60px 36px 56px;text-align:center;overflow-x:clip}
+.cover-castle{position:absolute;z-index:-1;top:26%;left:50%;width:170%;max-width:none;transform:translateX(-50%);object-fit:contain;opacity:.1;pointer-events:none}
+.cover-kicker{position:relative;z-index:1;margin:0;color:#590310;font:600 15px/1.3 "Cormorant Garamond",Georgia,serif;letter-spacing:.16em;text-transform:uppercase}
+.envelope-open{position:relative;z-index:1;width:min(92vw,680px);max-width:680px;margin:96px 0 0;padding:0;aspect-ratio:736/490;border:0;background:transparent;overflow:visible;appearance:none;cursor:pointer;transition:transform .35s ease,filter .35s ease}
+.envelope-open:hover{transform:translateY(-3px);filter:drop-shadow(0 8px 10px #3d0b1030)}
+.envelope-art{position:absolute;inset:0;display:block;aspect-ratio:736/490;overflow:visible;border-radius:3px;isolation:isolate;background:#681523;box-shadow:0 18px 34px #26080e45}
+.envelope-art:before{display:none;content:none}
+.envelope-art:after{position:absolute;z-index:50;top:60%;left:50%;width:18%;aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid rgba(255,226,159,.5);border-radius:50%;box-shadow:0 0 10px 3px rgba(255,218,126,.38),inset 0 0 9px 3px rgba(255,224,151,.26);content:"";pointer-events:none;animation:waxSealPulse 1.8s ease-in-out infinite}
+.cover.is-opening .envelope-art:after,.cover.is-open .envelope-art:after{opacity:0;animation:none}
+.cover.is-opening .envelope-art:before,.cover.is-open .envelope-art:before{display:none;content:none}
+@keyframes waxSealPulse{0%,100%{opacity:.3;filter:brightness(.95);transform:translate(-50%,-50%) scale(.94)}50%{opacity:.9;filter:brightness(1.3);transform:translate(-50%,-50%) scale(1.06)}}
+.envelope-bg,.envelope-cover-art{position:absolute;inset:0;display:block;width:100%;max-width:none;pointer-events:none}
+.envelope-bg{z-index:10;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+.envelope-closed-body{position:absolute;z-index:15;inset:0;background:#304018 url("assets/theme/envelope-closed-olive-champagne-v2.png") center/107% 120% no-repeat;box-shadow:0 0 0 1px #510c1b35;transition:opacity .8s ease}
+.envelope-closed-body:after{position:absolute;right:auto;bottom:-2%;left:-7%;width:76%;height:80%;background:url("assets/theme/envelope-calla-elegant-pair.png") left bottom/contain no-repeat;opacity:.94;filter:drop-shadow(0 2px 4px #26080e35);content:"";pointer-events:none}
+.envelope-photo-float{position:absolute;z-index:20;top:-2%;left:33%;width:64%;opacity:0;animation:drFloat 6.5s ease-in-out .4s infinite;transition:opacity .45s ease;will-change:transform}
+.envelope-photo-placeholder{display:grid;width:100%;aspect-ratio:221/309;place-items:center;transform:rotate(12deg);border:7px solid #fff;background:linear-gradient(145deg,#f8f5ef,#e5d8ca);box-shadow:2px 2px 4px #0004;color:#937b68;font:400 10px var(--sans);letter-spacing:.16em}
+.envelope-photo{display:block;width:100%;aspect-ratio:221/309;object-fit:cover;transform:rotate(12deg);border:7px solid #fff;box-shadow:2px 2px 8px #0004}
+.envelope-flower{position:absolute;z-index:25;top:-12%;left:-2%;width:42%;max-width:none;object-fit:contain;opacity:0;transform:rotate(-17deg);filter:drop-shadow(3px 4px 3px #0005);animation:drFloat 5s ease-in-out infinite;transition:opacity .45s ease;pointer-events:none}
+.envelope-cover-art{display:none}
+.envelope-flap{position:absolute;z-index:40;top:0;left:0;width:100%;height:53%;clip-path:polygon(0 0,0% 0,50% 0%);background-image:url("assets/theme/envelope-closed-olive-champagne-v2.png");background-position:top center;background-repeat:no-repeat;background-size:100% 188.68%;filter:drop-shadow(0 5px 4px #25070d80);transform-origin:50% 0;backface-visibility:hidden;transition:transform .9s cubic-bezier(.35,.05,.2,1),opacity .25s ease;pointer-events:none}
+.cover.is-opening .envelope-flap{transform:perspective(700px) rotateX(180deg)}
+.cover.is-opening .envelope-bg,.cover.is-open .envelope-bg{top:auto;bottom:0;height:auto;object-fit:contain;object-position:center bottom;opacity:1}
+.cover.is-opening .envelope-closed-body,.cover.is-open .envelope-closed-body{opacity:0}
+.cover.is-opening .envelope-cover-art,.cover.is-open .envelope-cover-art{opacity:0;clip-path:polygon(0 100%,0 95%,40% 48%,60% 48%,100% 95%,100% 100%)}
+.cover.is-opening .envelope-photo-float{z-index:25;opacity:1;animation:letterRise .92s .18s cubic-bezier(.2,.75,.25,1) both}
+.cover.is-opening .envelope-flower,.cover.is-open .envelope-photo-float,.cover.is-open .envelope-flower{opacity:1}
+.cover.is-open .envelope-flap{visibility:hidden;opacity:0}
+@keyframes letterRise{from{transform:translateY(38%)}to{transform:translateY(0)}}
+.cover h1{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:22px;margin:64px 0 0;color:var(--wine);font:400 clamp(38px,11vw,46px)/1 Viaoda Libre,"The Nautigal",cursive}
+.cover h1 span{position:relative;z-index:1;white-space:nowrap}
+.cover h1 i{position:absolute;z-index:0;top:37%;left:50%;transform:translate(-50%,-50%);color:rgba(81,20,25,.15);font:400 92px/1 "The Nautigal",cursive}
+#site{animation:pageIn .65s ease both}
+.wedding-info{position:relative;isolation:isolate;padding:0 0 28px;overflow:visible}
+.details-castle{position:absolute;z-index:-1;inset:-15% -30% -8%;background:url("assets/theme/castle-background.webp") center top/150% auto no-repeat;opacity:.1;pointer-events:none}
+.burgundy-panel{position:relative;overflow:hidden;background:var(--wine);color:var(--paper)}
+.invitation-panel,.reception-panel,.timeline-panel{width:88%;max-width:560px;margin:0 auto;border-radius:13px;padding:36px 20px 40px;box-shadow:4px 4px 10px #0004}
+.invitation-panel{display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
+.invitation-panel:before,.reception-panel:before,.timeline-panel:before{position:absolute;inset:0;z-index:0;border-radius:inherit;background:url("assets/theme/paper.webp") center/cover;mix-blend-mode:multiply;opacity:.4;content:"";pointer-events:none}
+.invitation-panel>*:not(.panel-flower),.reception-panel>*:not(.panel-flower),.timeline-panel>*:not(.timeline-paper){position:relative;z-index:1}
+.panel-flower{position:absolute;z-index:2;right:-22%;bottom:30%;width:40%;max-width:none;object-fit:contain;filter:drop-shadow(3px 4px 3px #0005);animation:drFloat 5.5s ease-in-out .6s infinite;pointer-events:none}
+.panel-title,.section-title{margin:0;color:var(--wine);font:700 20px/1.35 var(--serif);letter-spacing:.03em;text-align:center;text-transform:uppercase}
+.invitation-panel .panel-title,.reception-panel .panel-title,.timeline-panel .panel-title{color:var(--paper)}
+.family-grid{position:relative;z-index:1;display:grid;width:max-content;max-width:100%;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);align-items:center;column-gap:32px;text-align:center;color:var(--paper);font-family:var(--baskerville)}
+.family-grid article{display:grid;min-width:0;grid-template-rows:repeat(4,auto);justify-items:center;align-content:center;row-gap:3px}
+.family-grid article>span{color:var(--muted);font-size:12px}
+.family-grid article>strong{max-width:100%;color:var(--paper);font-size:12px;font-weight:600;overflow-wrap:anywhere}
+.family-grid article>p{width:100%;margin:4px 0 0;color:var(--muted);font-size:10px;line-height:1.2;overflow-wrap:anywhere}
+.family-divider{width:1px;height:50px;background:rgba(236,228,216,.4)}
+.announce{max-width:100%;margin:0;color:var(--paper);font:400 12px/1.45 var(--baskerville);text-align:center;white-space:pre-line}
+.couple-names{position:relative;z-index:1;display:flex;width:100%;min-width:0;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.couple-names h3{display:flex;min-height:72px;width:80%;align-items:center;justify-content:center;margin:0;color:var(--paper);font:400 43px/1.2 var(--script);white-space:nowrap}
+.couple-names i{color:var(--paper);font:400 35px/1 "Ms Madi",cursive}
+.ceremony-info{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:16px;color:var(--muted);font-family:var(--baskerville);text-align:center}
+.ceremony-info>p{margin:0;color:var(--muted);font:400 16px/1.55 var(--baskerville);white-space:pre-line}
+.ceremony-time{display:flex;justify-content:center;gap:34px;color:var(--muted);font-size:13px;text-transform:uppercase;white-space:nowrap}
+.ceremony-date,.reception-date{display:flex;align-items:center;justify-content:center;gap:16px;color:var(--paper);font-family:var(--serif)}
+.ceremony-date>strong,.reception-date>strong{font:400 40px/1 var(--serif)}
+.date-divider{width:1px;height:46px;background:rgba(236,228,216,.45)}
+.date-month{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left}
+.date-month b:first-child{font:400 12px/1.2 var(--serif);text-transform:uppercase}
+.date-month b:last-child{font:400 18px/1.1 var(--serif)}
+.ceremony-info>small,.lunar-date{margin:0;color:var(--muted);font:400 12px/1.4 var(--baskerville);letter-spacing:.12em;text-transform:uppercase}
+.album-section{position:relative;z-index:1;padding:30px 24px 40px;text-align:center}
+.album-section:before{position:absolute;z-index:-1;top:-6%;left:50%;width:150%;height:110%;transform:translateX(-50%);background:url("assets/theme/castle-background.webp") center top/contain no-repeat;opacity:.1;content:"";pointer-events:none}
+.section-title{color:var(--wine)}
+.album-viewer{position:relative;width:100%;max-width:600px;height:340px;margin:20px auto 14px;perspective:1000px;touch-action:pan-y}
+.album-stack{position:absolute;inset:0;display:grid;place-items:center}
+.album-placeholder{position:relative;width:auto;height:92%;aspect-ratio:2/3;border:1px solid #fff9;background:linear-gradient(145deg,#eee4d8,#d5c1ad);border-radius:16px;box-shadow:0 12px 30px #29101238;display:grid;place-items:center;color:#866d5e;font:400 10px var(--sans);letter-spacing:.18em;transition:transform 1.1s ease,opacity .4s ease}
+.album-placeholder:before,.album-placeholder:after{position:absolute;z-index:-1;inset:4% -5%;border:1px solid #fff8;border-radius:16px;background:linear-gradient(145deg,#eadfd3,#d3bfad);box-shadow:0 8px 22px #29101224;content:"";transform:rotate(5deg)}
+.album-placeholder:after{inset:2% -2%;transform:rotate(-3deg)}
+.album-arrow{position:absolute;z-index:3;top:50%;display:none;width:32px;height:32px;align-items:center;justify-content:center;transform:translateY(-50%);border:0;border-radius:50%;background:rgba(236,228,216,.7);color:var(--wine);font:400 24px var(--serif);transition:background .2s,transform .2s}
+.album-arrow:hover{transform:translateY(-50%) scale(1.08);background:var(--paper)}
+.album-arrow.prev{left:5px}.album-arrow.next{right:5px}
+.album-count{position:absolute;right:8px;bottom:0;color:rgba(81,20,25,.65);font-size:11px}
+.album-thumbs{display:flex;justify-content:center;gap:10px;margin:12px auto}
+.album-thumbs button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:currentColor;color:var(--wine);opacity:.25;transition:opacity .25s,transform .25s}
+.album-thumbs button.active{opacity:.9;transform:scale(1.3)}
+.reception-section{position:relative;z-index:1;margin:0 0 24px}
+.reception-panel{display:flex;flex-direction:column;align-items:center;gap:20px;padding:36px 20px 40px;border-radius:10px;text-align:center}
+.reception-panel h3{margin:0;color:var(--paper);font:400 20px/1.35 var(--baskerville);text-transform:uppercase}
+.reception-time{display:flex;width:max-content;justify-content:space-between;gap:14px;color:var(--muted);font:400 13px var(--baskerville);text-transform:uppercase}
+.reception-date>strong{font-size:40px}
+.reception-date .date-month b:first-child{font-size:12px}.reception-date .date-month b:last-child{font-size:18px}
+.schedule-pills{display:flex;justify-content:center;gap:32px;margin-top:0;color:var(--muted);font-family:var(--baskerville)}
+.schedule-pills div{display:flex;flex-direction:column;align-items:center;gap:4px}
+.schedule-pills span{font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.schedule-pills strong{color:var(--paper);font-size:18px;font-weight:500}
+.rsvp-link{position:relative;margin:6px auto 0;padding:9px 24px;border:0;border-radius:999px;background:var(--paper);color:var(--wine);font:400 14px var(--baskerville);letter-spacing:.04em;transition:transform .2s ease}
+.rsvp-link:hover{transform:scale(1.03)}
+.venue-details{width:100%;display:flex;flex-direction:column;align-items:center;gap:10px}
+.venue-details h3{max-width:100%;font-size:18px}
+.venue-address{max-width:440px;margin:0;color:var(--muted);font:400 13px/1.6 var(--baskerville)}
+.map-frame{display:block;width:100%;height:240px;margin:2px auto 0;border:0;border-radius:8px;filter:sepia(.15) saturate(.8)}
+.directions-link{display:flex;width:max-content;align-items:center;gap:7px;margin:2px auto 0;color:var(--paper);font:400 14px var(--baskerville);text-decoration:underline;text-underline-offset:3px;transition:transform .2s}
+.directions-link:hover{transform:scale(1.03)}
+.dress-section{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;padding:40px 24px 44px;text-align:center}
+.dress-section .section-title{font-size:20px}.dress-section p{margin:0;color:rgba(81,20,25,.8);font:400 14px/1.5 var(--serif)}
+.dress-colors{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:10px}
+.dress-colors span{width:40px;height:40px;border:0;border-radius:50%;background:var(--wine);box-shadow:0 3px 8px #0002}
+.dress-colors span:nth-child(2){background:#8c3a3f}.dress-colors span:nth-child(3){background:#c9a24a}.dress-colors span:nth-child(4){border:1.5px solid #51141930;background:var(--paper)}
+.timeline-section{position:relative;z-index:1;overflow:hidden;padding:16px 0 32px}
+.timeline-flower{position:absolute;z-index:1;top:-24px;right:-22px;left:auto;width:clamp(120px,22vw,176px);max-width:none;opacity:.34;object-fit:contain;transform:rotate(12deg);filter:drop-shadow(2px 3px 3px #0003);animation:none;pointer-events:none}
+.timeline-panel{padding:34px 24px 38px;border-radius:10px}
+.timeline-paper{position:absolute;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;opacity:.4;pointer-events:none}
+.timeline-panel .panel-title{position:relative;z-index:2;margin-bottom:28px}
+.timeline{position:relative;z-index:1;display:grid;width:100%;max-width:460px;grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr);align-items:center;gap:32px 24px;margin:0 auto;padding:0;list-style:none;font-family:var(--serif)}
+.timeline li{display:contents}
+.timeline li>time{position:relative;display:flex;align-items:center;justify-content:flex-end;gap:8px;padding-top:2px;color:var(--paper);font:400 16px/1.35 var(--serif);letter-spacing:.04em;text-align:right;white-space:nowrap}
+.timeline li>time img{position:static;display:block;flex:0 0 clamp(30px,3.2vw,36px);width:clamp(30px,3.2vw,36px);height:clamp(30px,3.2vw,36px);transform:none;object-fit:contain;filter:drop-shadow(0 1px 1px #0003)}
+.timeline-dot{position:relative;display:flex;align-self:stretch;align-items:center;justify-content:center}
+.timeline-dot:before{position:absolute;top:50%;bottom:-34px;left:50%;width:1px;transform:translateX(-50%);background:#ece4d866;content:""}
+.timeline li:last-child .timeline-dot:before{display:none}
+.timeline-dot:after{position:relative;width:10px;height:10px;border:2px solid #ece4d822;border-radius:50%;background:var(--paper);content:""}
+.timeline li>span:last-child{color:var(--muted);font:400 13px/1.4 var(--serif)}
+.guestbook-section{position:relative;z-index:1;overflow:hidden;padding:34px 24px 42px}
+.guestbook-art{position:absolute;z-index:0;top:-30px;left:50%;width:120%;max-width:650px;transform:translateX(-50%);object-fit:contain;opacity:.95;pointer-events:none}
+.guestbook-content{position:relative;z-index:1;max-width:600px;margin:auto;padding:74px 24px 32px;color:var(--wine);font-family:var(--serif)}
+.guestbook-content .section-title{position:relative;transform:translateY(16px)}
+.wish-form{display:grid;max-width:380px;gap:10px;margin:24px auto 0}
+.wish-form input,.wish-form textarea{width:100%;height:56px;padding:12px 14px;border:1px solid var(--wine);border-radius:8px;outline:none;background:transparent;color:var(--wine);font:400 14px var(--sans)}
+.wish-form textarea{height:56px;resize:none}
+.wish-form input::placeholder,.wish-form textarea::placeholder{color:#5114199c}
+.wish-actions{display:flex;align-items:center;justify-content:space-between;margin-top:5px}
+.magic-button{padding:8px 10px;border:0;border-radius:8px;background:#5114191a;color:var(--wine);font-size:16px;transition:transform .2s}
+.magic-button:hover{transform:scale(1.1)}
+.wish-submit{padding:8px 24px;border:0;border-radius:999px;background:var(--wine);color:#ded9d7;font:600 14px var(--sans);transition:transform .2s}
+.wish-submit:hover{transform:scale(1.05)}
+.wish-list{display:grid;max-height:500px;gap:12px;margin:60px auto 0;overflow-y:auto;padding-right:8px}
+.wish-list article{padding:16px;border:1px solid #51141935;border-radius:8px;background:#fff7eb85;font-size:14px}
+.wish-list strong{font-weight:600}.wish-list time{float:right;color:#5114199c;font-size:11px}.wish-list p{margin:9px 0 0;line-height:1.55}
+.gift-section{position:relative;z-index:1;padding:28px 24px 42px;text-align:center}
+.gift-teaser{position:relative;max-width:360px;margin:18px auto 0}
+.gift-teaser img{display:block;width:100%;height:230px;object-fit:contain}
+.gift-teaser button{margin:8px auto 0;padding:10px 24px;border:0;border-radius:999px;background:var(--wine);color:var(--paper);font:400 14px var(--baskerville);transition:transform .2s}
+.gift-teaser button:hover{transform:scale(1.03)}
+.footer{position:relative;z-index:1;padding:24px 18px 36px;text-align:center;color:var(--wine);font:400 20px/1.3 var(--serif)}
+.footer p{margin:0}.footer a{display:inline-block;margin-top:10px;color:var(--wine);font:400 12px var(--serif);text-decoration:none}
+.site-dialog{position:fixed;width:min(92vw,560px);max-height:90vh;padding:0;overflow:auto;border:0;border-radius:12px;background:var(--cream);color:var(--wine);box-shadow:0 18px 70px #18070966}
+.site-dialog::backdrop{background:#18070999;backdrop-filter:blur(2px)}
+.site-dialog>header{position:sticky;top:0;z-index:2;padding:24px 48px 18px;background:var(--wine);color:#fff}
+.site-dialog>header h2{margin:0;color:white;font:700 20px var(--serif);letter-spacing:.03em;text-align:center}
+.dialog-close{position:absolute;z-index:3;top:12px;right:12px;width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:#ffffffd0;font-size:24px;line-height:1}
+.rsvp-form{display:grid;gap:16px;padding:24px}
+.rsvp-form label{display:grid;gap:6px;color:var(--wine);font:400 12px var(--baskerville)}
+.rsvp-form input,.rsvp-form select{width:100%;padding:10px 4px;border:0;border-bottom:1px solid #51141955;background:transparent;color:var(--wine);font:400 15px var(--sans);outline:none}
+.rsvp-form>button{padding:11px 18px;border:0;border-radius:999px;background:var(--wine);color:var(--paper);font:500 13px var(--sans)}
+.status{margin:0;color:var(--wine);font:400 13px var(--sans)}
+.gift-accounts{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;padding:22px 16px 28px}
+.gift-accounts article{display:flex;max-width:220px;flex:1 1 180px;flex-direction:column;align-items:center;text-align:center;color:var(--wine)}
+.gift-accounts h3{min-height:2rem;margin:0 0 8px;font:500 12px/1.3 var(--sans)}
+.gift-qr{display:block;width:200px;max-width:100%;height:200px;flex-shrink:0;object-fit:fill;background:#fff}
+.qr-placeholder{display:grid;width:128px;height:128px;place-items:center;border:2px solid #51141920;border-radius:12px;background:repeating-conic-gradient(#511419 0 25%,#fff 0 50%) 50%/14px 14px;box-shadow:0 8px 18px #0002}
+.gift-accounts p,.gift-accounts strong{margin:2px 0;font:400 10px var(--sans)}
+.gift-accounts button{margin-top:8px;padding:5px 10px;border:0;border-radius:999px;background:#51141915;color:var(--wine);font:500 10px var(--sans)}
+@keyframes drFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:768px){
+  .invitation-shell{max-width:900px;border-right:1px solid #51141922;border-left:1px solid #51141922}
+  .cover{padding-top:60px;padding-bottom:56px}
+  .cover h1{gap:22px;margin-top:80px;font-size:58px}
+  .cover h1 i{font-size:120px}
+  .invitation-panel,.reception-panel,.timeline-panel{max-width:560px}
+  .family-grid{column-gap:32px}
+  .album-section{padding-top:40px}
+  .album-viewer{height:520px}
+  .album-arrow{display:flex}
+  .guestbook-content{padding-top:120px}
+  .wish-form{max-width:380px}
+  .wish-form textarea{height:110px}
+}
+
+/* Keep the floral image visible above the later countdown color overrides. */
+.wedding-countdown{
+  background-color:#46553a;
+  background-image:linear-gradient(rgba(48,64,24,.62),rgba(48,64,24,.62)),url("assets/theme/Elegant Calla Lily Corner Frame.png");
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-blend-mode:multiply;
+}
+.heart-burst span{
+  color:#d62839!important;
+  text-shadow:0 2px 8px rgba(110,12,24,.58);
+}
+.heart-burst span{
+  color:#d62839;
+  text-shadow:0 2px 8px rgba(110,12,24,.58);
+}
+
+/* RSVP call-to-action: stronger type. */
+.rsvp-link{
+  font-weight:700;
+  letter-spacing:.06em;
+  text-shadow:0 1px 1px rgba(0,0,0,.16);
+}
+@media(max-width:650px){
+  .cover{padding:48px 24px 44px}
+  .cover-kicker{font-size:15px}
+  .cover h1{gap:22px;margin-top:50px;font-size:clamp(38px,11vw,46px)}
+  .cover h1 i{font-size:92px}
+  .invitation-panel,.reception-panel{width:88%;padding:32px 18px 36px}
+  .family-grid{column-gap:16px}
+  .family-grid article>strong{font-size:11px}
+  .album-section{padding:30px 22px 34px}
+  .album-viewer{height:340px}
+  .album-arrow{display:none}
+  .timeline-panel{width:88%;padding:30px 16px 34px}
+  .timeline{grid-template-columns:minmax(0,1fr) 14px minmax(0,1fr);column-gap:12px;row-gap:32px}
+  .timeline li>time{font-size:15px}
+  .timeline li>time img{width:30px;height:30px;right:calc(100% + 4px)}
+  .timeline li>span:last-child{font-size:12px}
+  .timeline-dot:before{bottom:-34px}
+  .guestbook-content{padding:74px 4px 28px}
+  .wish-list{margin-top:60px}
+  .gift-accounts{flex-direction:column;align-items:center}
+}
+
+/* Keep both envelopes moving as one pair. */
+.gift-teaser:hover .gift-back,
+.gift-envelope-button:hover .gift-back,
+.gift-envelope-button:active .gift-back,
+.gift-teaser.is-opening .gift-back{
+  animation:giftBackWiggle .7s ease-in-out both;
+}
+@keyframes giftBackWiggle{
+  0%{transform:translate(20%,-10%) scaleX(-.8) scaleY(.8) rotate(-15deg)}
+  22%{transform:translate(20%,-10%) scaleX(-.8) scaleY(.8) rotate(-22deg)}
+  45%{transform:translate(20%,-10%) scaleX(-.8) scaleY(.8) rotate(-8deg)}
+  68%{transform:translate(20%,-10%) scaleX(-.8) scaleY(.8) rotate(-19deg)}
+  100%{transform:translate(20%,-10%) scaleX(-.8) scaleY(.8) rotate(-15deg)}
+}
+.gift-teaser:hover .gift-front,
+.gift-envelope-button:hover .gift-front,
+.gift-envelope-button:focus .gift-front,
+.gift-envelope-button:focus-visible .gift-front,
+.gift-envelope-button:active .gift-front,
+.gift-teaser.is-opening .gift-front{
+  animation:giftFrontWiggle .7s ease-in-out both;
+}
+@keyframes giftFrontWiggle{
+  0%{transform:rotate(-10deg)}
+  22%{transform:translateY(-3px) rotate(-16deg)}
+  45%{transform:translateY(-2px) rotate(-4deg)}
+  68%{transform:translateY(-3px) rotate(-13deg)}
+  100%{transform:rotate(-10deg)}
+}
+
+/* Balance the two envelopes over the center of the green backdrop. */
+.gift-envelopes .gift-back{
+  transform:translate(-18%,-8%) scaleX(-.8) scaleY(.8) rotate(-15deg);
+}
+.gift-envelopes .gift-front{
+  transform:translate(18%,0) rotate(-10deg);
+}
+@media(max-width:767px){
+  .gift-envelopes .gift-back{transform:translate(-14%,-6%) scaleX(-.72) scaleY(.72) rotate(-15deg)}
+  .gift-envelopes .gift-front{transform:translate(14%,0) rotate(-10deg)}
+}
+
+/* Temporarily hide the two floral decorations in the wedding ceremony panel. */
+.wedding-info>.wedding-botanical-frame3,
+.wedding-info>.invitation-panel>.panel-flower-left{
+  display:none!important;
+}
+
+/* Floral artwork fitted inside the green ceremony panel. */
+.wedding-info>.invitation-panel::after{
+  position:absolute;
+  z-index:0;
+  inset:0;
+  border-radius:inherit;
+  background:url("assets/theme/Elegant Calla Lily Corner Frame.png") center/cover no-repeat;
+  content:"";
+  opacity:.28;
+  mix-blend-mode:screen;
+  pointer-events:none;
+}
+.wedding-info>.invitation-panel>*:not(.panel-flower){position:relative;z-index:4}
+
+/* Restore the original two ceremony decorations. */
+.wedding-info>.invitation-panel::after{display:none!important}
+.wedding-info>.wedding-botanical-frame3,
+.wedding-info>.invitation-panel>.panel-flower-left{
+  display:block!important;
+}
+.wedding-countdown{
+  background-image:linear-gradient(rgba(48,64,24,.62),rgba(48,64,24,.62)),url("assets/theme/Elegant Calla Lily Corner Frame.png");
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-blend-mode:multiply;
+}
+
+
+.music-toggle{position:fixed;z-index:1200;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));display:grid;width:46px;height:46px;place-items:center;padding:0;border:1px solid rgba(111,77,49,.42);border-radius:50%;background:rgba(250,246,237,.94);color:#5d4835;box-shadow:0 4px 16px rgba(40,22,14,.2);cursor:pointer;backdrop-filter:blur(8px);transition:background .2s ease,color .2s ease,transform .2s ease}
+.music-toggle:hover{transform:translateY(-2px)}
+.music-toggle-icon{display:block;border:0;font:26px/1 Georgia,serif}
+.music-toggle.is-playing{background:#6e1826;color:#fff8ec;border-color:#8d5a43}
+.music-toggle.is-playing .music-toggle-icon{animation:musicDiscSpin 3s linear infinite}
+@keyframes musicDiscSpin{to{transform:rotate(360deg)}}
+@media(max-width:480px){.music-toggle{right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));width:42px;height:42px}}
+@media(prefers-reduced-motion:reduce){.music-toggle,.music-toggle-icon{transition:none;animation:none!important}}
+.wish-status{max-width:560px;margin:12px auto 0;color:var(--wine);font:400 13px/1.5 var(--sans);text-align:center}
+
+/* Restore the original full-screen cover and 3D album carousel. */
+.cover{min-height:100vh;min-height:100svh;padding:60px 36px 56px;justify-content:center}
+.cover.is-open{min-height:100vh;min-height:100svh;padding:60px 36px 56px}
+.cover-kicker{font-size:clamp(24px,6vw,34px);letter-spacing:.12em}
+.envelope-open{width:min(92vw,680px);max-width:680px;margin-top:72px;aspect-ratio:736/490}
+.envelope-art{aspect-ratio:736/490;overflow:visible;border-radius:3px;background:#681523;box-shadow:0 18px 34px #26080e45}
+.envelope-bg{inset:0;right:auto;bottom:auto;height:100%;object-fit:cover}
+.envelope-photo-float{top:-2%;left:33%;width:64%}
+.envelope-photo{aspect-ratio:221/309;border:7px solid #fff}
+.envelope-flower{top:-12%;left:-2%;width:42%}
+.envelope-cover-art{display:none!important}
+.cover h1{gap:22px;margin-top:80px;font-size:58px}
+.cover h1 i{font-size:120px}
+.album-section{max-width:920px;margin:0 auto;padding:44px 24px 56px}
+.album-viewer{height:clamp(360px,62vw,520px);overflow:visible}
+.album-stack{perspective:1000px;transform-style:preserve-3d}
+.album-card{position:absolute;left:50%;display:grid;width:auto;height:92%;aspect-ratio:2/3;padding:0;place-items:center;overflow:hidden;border:8px solid #fff;border-radius:10px;background:linear-gradient(145deg,#f8f3ec,#ded2c3);box-shadow:0 12px 30px #29101238;transform-style:preserve-3d;transition:transform 1.1s ease,opacity .35s ease,filter .35s ease;cursor:pointer;backface-visibility:hidden;user-select:none}
+.album-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:none}
+.album-card.is-active{box-shadow:0 16px 38px #29101250}
+.album-card:not(.is-active){filter:saturate(.82)}
+.album-thumbs{display:flex;justify-content:center;gap:10px;margin:12px auto}
+.album-thumbs button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:currentColor;color:var(--wine);opacity:.25;transition:opacity .25s,transform .25s}
+.album-thumbs button.active{opacity:.9;transform:scale(1.3)}
+.album-count{position:absolute;right:8px;bottom:0;color:rgba(81,20,25,.65);font-size:11px}
+.album-arrow{display:none}
+.heart-burst{position:absolute;z-index:45;inset:0;display:none;overflow:visible;pointer-events:none}
+.heart-burst.play{display:block}
+.heart-burst span{position:absolute;top:58%;left:50%;color:#e4b3b0;font-size:17px;text-shadow:0 1px 5px #4b0a19;opacity:0;animation:heartRise 3.4s ease-out var(--heart-delay) both}
+@keyframes heartRise{0%{opacity:0;transform:translate(-50%,0) scale(.5)}12%{opacity:.9}100%{opacity:0;transform:translate(calc(-50% + var(--heart-x)),var(--heart-y)) scale(1.15)}}
+@media(min-width:768px){.album-viewer{height:520px}.album-arrow{display:flex}}
+@media(max-width:650px){
+  .cover{padding:48px 22px 38px}
+  .cover.is-open{padding:48px 22px 38px}
+  .cover-kicker{font-size:clamp(24px,7vw,30px)}
+  .envelope-open{width:min(92vw,680px);margin-top:36px}
+  .cover h1{margin-top:36px;font-size:clamp(36px,10vw,44px)}
+  .cover h1 i{font-size:92px}
+  .album-section{padding:34px 18px 42px}
+  .album-viewer{height:340px}
+  .album-arrow{display:none}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.album-card{position:absolute;display:grid;width:auto;height:92%;aspect-ratio:2/3;place-items:center;overflow:hidden;border:1px solid #fff9;border-radius:16px;background:linear-gradient(145deg,#f0e7dc,#d6c2af);box-shadow:0 12px 30px #29101238;transform-style:preserve-3d;transition:transform 1.1s ease,opacity .35s ease,filter .35s ease;color:#896f5e;font:400 9px var(--sans);letter-spacing:.16em;will-change:transform}.album-card>span{display:none}.album-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.album-card.is-active{border-color:#fff;box-shadow:0 16px 38px #29101250}.timeline-flower{left:auto;right:-16%;top:-12%;width:30%}.gift-teaser{width:100%;max-width:320px;height:325px;margin:14px auto 0}.gift-envelopes{position:relative;width:100%;height:275px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:0}.gift-envelopes img{position:absolute;bottom:0;width:190px;height:275px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 8px 14px #0003);transform-origin:50% 100%;will-change:transform}.gift-envelopes .gift-back{z-index:1;transform:translate(20%,-10%) scaleX(-.8) scaleY(.8) rotate(-15deg)}.gift-envelopes .gift-front{z-index:2;transform:rotate(-10deg);transition:transform .65s ease,opacity .45s ease}.gift-teaser.is-opening .gift-front{transform:translateY(-20px) rotate(2deg) scale(1.04);opacity:.7}.gift-teaser>button{position:relative;z-index:3;margin-top:0}
+/* Paper shell and reference envelope placement */
+.invitation-shell{position:relative;isolation:isolate;width:100%;max-width:480px;margin:0 auto;overflow:hidden;background:var(--cream);color:var(--wine)}
+.paper-grain{position:absolute;z-index:0;inset:0;pointer-events:none}
+.paper-grain:before{position:absolute;inset:0;background:url("assets/theme/paper.webp") top center/100% auto repeat-y;mix-blend-mode:multiply;opacity:.5;content:""}
+.cover,#site{position:relative;z-index:1;width:100%;max-width:none;margin:0;overflow:hidden;background:transparent;color:var(--wine)}
+.album-card{left:50%;width:auto;height:92%;aspect-ratio:2/3;transform-origin:center center}
+@media(min-width:768px){.invitation-shell{max-width:900px;border-right:1px solid #51141922;border-left:1px solid #51141922}}/* Responsive album layout. */
+.album-viewer{max-width:600px;perspective:1000px;touch-action:pan-y;overflow:visible}
+.album-stack{perspective:1000px;transform-style:preserve-3d}
+.album-card{cursor:pointer;backface-visibility:hidden;user-select:none}
+.album-card:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.album-card:not(.is-active){filter:none}/* Envelope opening animation. */
+.cover.is-opening .envelope-photo-float{animation-duration:1.25s;animation-delay:.38s}
+/* Opening-cover layout fixes based on mobile and desktop viewport review. */
+.cover{min-height:100vh;min-height:100svh}
+
+
+/* Minimalism dark-red reference refinements, keeping the existing invitation content. */
+:root{--wine:#511419;--wine-deep:#3d0b10;--cream:#fff7eb;--paper:#ece4d8;--muted:rgba(236,228,216,.72);--gold:#c9a24a}
+body{background:#fff7eb;color:var(--wine)}
+.invitation-shell{width:100%;max-width:none;background:var(--cream);color:var(--wine);border:0}
+.paper-grain:before{background:url("assets/theme/paper.webp") top center/100% auto repeat-y;mix-blend-mode:multiply;opacity:.46}
+.cover{min-height:100vh;min-height:100svh;padding:clamp(48px,8vh,76px) 24px 48px;justify-content:flex-start;background:transparent;color:var(--wine)}
+.cover-castle{top:24%;width:min(120%,1000px);opacity:.12}
+.cover-kicker{margin:0;color:#590310;font:600 clamp(24px,6vw,34px)/1.15 "Cormorant Garamond",Georgia,serif;letter-spacing:.16em;text-transform:uppercase}
+.envelope-photo-placeholder{border:7px solid #fff;background:linear-gradient(145deg,#f8f5ef,#e5d8ca);box-shadow:2px 2px 8px #0004}
+.cover h1{gap:16px;margin:clamp(36px,6vh,58px) 0 0;color:var(--wine);font:400 clamp(36px,9vw,48px)/1.06 "Viaoda Libre","The Nautigal",cursive}
+.cover h1 i{color:rgba(81,20,25,.18);font:400 clamp(84px,21vw,108px)/1 "The Nautigal",cursive}
+.wedding-info,.album-section,.reception-section,.map-section,.dress-section,.timeline-section,.guestbook-section,.gift-section{font-family:"Cormorant Garamond",Georgia,serif}
+.wedding-info{padding:clamp(56px,9vw,92px) 0 42px}
+.details-castle{opacity:.12}
+.burgundy-panel{background:var(--wine);color:var(--paper);border-radius:10px;box-shadow:0 12px 30px #32101424}
+.invitation-panel,.reception-panel,.timeline-panel{max-width:560px;border-radius:10px;padding:clamp(32px,6vw,48px) clamp(20px,5vw,34px)}
+.invitation-panel:before,.reception-panel:before,.timeline-panel:before{background:url("assets/theme/paper.webp") center/cover;mix-blend-mode:multiply;opacity:.4}
+.panel-title,.section-title{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;letter-spacing:.07em}
+.panel-title{font-size:clamp(18px,4vw,23px)}
+.family-grid article>span,.family-grid article>strong,.family-grid article>p,.announce,.ceremony-info,.lunar-date{font-family:"Cormorant Garamond",Georgia,serif}
+.announce{font-size:13px;letter-spacing:.08em}
+.couple-names h3{font-family:"The Nautigal",cursive;font-size:clamp(40px,10vw,52px)}
+.couple-names p{font-family:"Cormorant Garamond",Georgia,serif}
+.section-title{font-size:clamp(23px,5vw,30px);letter-spacing:.08em}
+.album-section{max-width:920px;margin:0 auto;padding:44px 24px 56px}
+.album-viewer{height:clamp(360px,62vw,520px)}
+.album-section:before{opacity:.12}
+.album-placeholder,.album-card{border:8px solid #fff;border-radius:10px;background:linear-gradient(145deg,#f8f3ec,#ded2c3);box-shadow:0 12px 30px #29101238}
+.album-placeholder{color:#806b61;letter-spacing:.16em}
+.album-card.is-active{box-shadow:0 16px 38px #29101250}
+.album-thumbs button{border-radius:5px}
+.reception-section{margin:0 auto 36px;padding:22px 0}
+.reception-panel>h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400}
+.reception-time,.schedule-pills,.rsvp-link{font-family:"Cormorant Garamond",Georgia,serif}
+.venue-address{font-family:"Cormorant Garamond",Georgia,serif;font-size:15px}
+.map-frame{border:6px solid #fff;border-radius:8px;box-shadow:0 8px 24px #32101420;filter:sepia(.12) saturate(.85)}
+.dress-section{padding:44px 24px 52px}
+.dress-section p{font-family:"Cormorant Garamond",Georgia,serif;font-size:16px}
+.dress-colors{gap:14px}.dress-colors span{width:36px;height:36px;border:1px solid #51141938}
+.timeline-section{padding:28px 0 46px}
+.timeline-panel{padding:38px clamp(20px,5vw,34px) 44px}
+.timeline-paper{mix-blend-mode:multiply;opacity:.4}
+.timeline li>time,.timeline li>span:last-child{font-family:"Cormorant Garamond",Georgia,serif}
+.guestbook-content{font-family:"Cormorant Garamond",Georgia,serif}
+.wish-form input,.wish-form textarea{border-radius:8px;background:#fff8;font-family:"Cormorant Garamond",Georgia,serif}
+.wish-list article{border-radius:8px;background:#fff9;box-shadow:0 5px 18px #32101410}
+.gift-teaser button,.wish-submit,.rsvp-link{letter-spacing:.06em}
+.site-dialog{border-radius:12px}
+@media(min-width:768px){.cover{padding-top:clamp(64px,7vh,64px)}.envelope-open{margin-top:72px}.cover h1{font-size:58px}.cover h1 i{font-size:120px}.wedding-info{padding-top:78px}.album-section{padding-top:56px;padding-bottom:66px}.album-viewer{height:520px}.map-section{padding-top:60px;padding-bottom:66px}}
+.cover-kicker{letter-spacing:.12em}
+@media(max-width:650px){.cover{padding:48px 22px 38px}.cover-kicker{font-size:clamp(24px,7vw,30px)}.envelope-open{margin-top:36px}.cover h1{margin-top:36px;font-size:clamp(36px,10vw,44px)}.cover h1 i{font-size:92px}.wedding-info{padding-top:44px}.invitation-panel,.reception-panel,.timeline-panel{width:88%;padding:30px 18px 36px}.album-section{padding:34px 18px 42px}.album-viewer{height:340px}.map-section{padding:36px 20px 42px}.dress-section{padding:36px 20px 42px}}
+@media(max-height:700px){.cover{padding-top:28px}.envelope-open{margin-top:28px}.cover h1{margin-top:24px}}
+
+/* Minimalism Dark Red demo layout */
+.invitation-shell{width:100%;max-width:480px;margin:0 auto;background:var(--cream);color:var(--wine)}
+body{background:#fff}
+.cover{min-height:100vh;min-height:100svh;padding:60px 36px 56px}
+.cover.is-open{min-height:0;padding-top:60px;padding-bottom:56px}
+.cover-kicker{font-size:18px;line-height:1.3;letter-spacing:.16em}
+.envelope-open{width:min(82%,330px);max-width:330px;margin-top:96px;aspect-ratio:333/384}
+.envelope-art{aspect-ratio:333/384;overflow:visible;border-radius:0;background:transparent;box-shadow:none}
+.envelope-bg{right:auto;bottom:auto;height:auto;object-fit:initial}
+.envelope-closed-body{z-index:15}
+.envelope-photo-float{top:-2%;left:33%;width:64%}
+.envelope-photo{aspect-ratio:221/309;border:7px solid #fff}
+.envelope-flower{top:-12%;left:-2%;width:42%;z-index:25}
+.envelope-cover-art{display:none;z-index:30}
+.cover.is-open .envelope-cover-art{display:block;opacity:1;clip-path:none}
+.cover.is-open .envelope-bg{opacity:1}
+.cover.is-open .envelope-closed-body{opacity:0}
+.cover-castle{top:26%;width:170%;opacity:.1}
+.cover h1{gap:22px;margin-top:64px;font-size:clamp(38px,11vw,46px);line-height:1}
+.cover h1 i{font-size:92px}
+.wedding-info{padding:0 0 28px}
+.invitation-panel,.reception-panel,.timeline-panel{width:88%;max-width:420px;border-radius:13px}
+.panel-title,.section-title{font-family:"Times New Roman",serif;font-size:20px;font-weight:700;letter-spacing:.03em}
+.invitation-panel .panel-title,.reception-panel .panel-title,.timeline-panel .panel-title{font-size:20px}
+.album-section{max-width:none;margin:0;padding:40px 24px;text-align:center}
+.album-section:before{opacity:.1}
+.album-grid{display:grid;width:100%;max-width:380px;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:20px auto 0}
+.album-card{position:relative;left:auto;display:block;width:100%;height:auto;aspect-ratio:1;padding:0;overflow:hidden;border:0;border-radius:4px;background:#5114190d;box-shadow:none;transform:none;cursor:pointer}
+.album-card img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.album-card:not(.is-active){filter:none}
+.album-card:hover img{transform:none}
+.reception-section{width:88%;max-width:420px;margin:0 auto 16px;padding:0}
+.reception-panel{width:100%;max-width:none;gap:24px;padding:36px 20px 40px}
+.reception-panel h3{font-size:20px}
+.couple-names{gap:12px}
+.couple-names h3{min-height:0;height:52px;font-size:43px;line-height:52px}
+.couple-names p{font-size:10px;letter-spacing:.14em}
+.couple-names i{font-size:35px;line-height:1}
+.calendar{width:280px;max-width:100%}
+.map-section{display:flex;max-width:none;flex-direction:column;align-items:center;margin:0;padding:32px 24px 36px;overflow:hidden}
+.map-castle{inset:-1% -30% 0;background:url("assets/theme/castle-background.webp") center top/158% auto no-repeat;opacity:.1}
+.map-section .section-title{font-size:20px}
+.venue-address{max-width:260px;margin:8px auto 14px;font-size:12px;line-height:1.65}
+.map-frame{width:100%;max-width:338px;height:268px;margin:12px auto 0;border:0;border-radius:15px;filter:none}
+.directions-link{margin-top:16px}
+.dress-section{gap:20px;padding:40px 24px}
+.dress-section .section-title{font-size:20px}
+.dress-section p{font-size:14px}
+.dress-colors{gap:12px;margin-top:0}
+.dress-colors span{width:36px;height:36px}
+.timeline-section{width:88%;max-width:420px;margin:16px auto; padding:0}
+.timeline-panel{width:100%;max-width:none;padding:36px 24px}
+.guestbook-section{padding:0 24px 32px}
+.gift-section{padding:32px 24px 40px}
+.gift-section:before{position:absolute;z-index:0;top:6%;left:50%;width:155%;height:110%;transform:translateX(-50%);background:url("assets/theme/castle-background.webp") center top/contain no-repeat;opacity:.1;content:"";pointer-events:none}
+.album-dialog{position:fixed;width:min(92vw,1000px);max-width:none;max-height:92vh;padding:48px 56px 24px;overflow:visible;border:0;border-radius:10px;background:#fff7eb;box-shadow:0 18px 60px #0008}
+.album-dialog::backdrop{background:#1a080bd9;backdrop-filter:blur(4px)}
+.album-dialog>img{display:block;width:100%;max-height:calc(92vh - 72px);object-fit:contain}
+.album-dialog-close,.album-dialog-arrow{position:absolute;z-index:1;display:grid;width:40px;height:40px;place-items:center;border:0;border-radius:50%;background:#fff7eb;color:var(--wine);font:400 28px/1 "Times New Roman",serif}
+.album-dialog-close{top:8px;right:8px;font-size:26px}
+.album-dialog-arrow{top:50%;transform:translateY(-50%)}
+.album-dialog-arrow.prev{left:8px}.album-dialog-arrow.next{right:8px}
+@media(min-width:768px){
+  .invitation-shell{max-width:900px}
+  .cover{padding-top:60px;padding-bottom:56px}
+  .cover.is-open{padding-top:60px;padding-bottom:56px}
+  .cover-kicker{font-size:18px}
+  .envelope-open{width:min(82%,420px);max-width:420px;margin-top:112px}
+  .cover h1{margin-top:80px;font-size:58px}
+  .cover h1 i{font-size:120px}
+  .couple-names h3{height:60px;font-size:46px;line-height:60px}
+  .wedding-info{padding-top:0}
+  .invitation-panel,.reception-panel,.timeline-panel,.reception-section,.timeline-section{max-width:560px}
+  .album-grid{max-width:600px;gap:24px}
+  .reception-section{margin-bottom:16px}
+  .calendar{width:330px}
+  .map-section{padding-top:32px;padding-bottom:32px}
+  .venue-address{max-width:440px;font-size:14px}
+  .map-frame{max-width:560px;height:380px}
+  .dress-section{padding-top:48px;padding-bottom:48px}
+  .timeline-section{margin-top:16px;margin-bottom:16px}
+  .guestbook-section{padding-bottom:32px}
+}
+@media(max-width:650px){
+  .cover{padding:60px 36px 56px}
+  .cover.is-open{padding-top:60px;padding-bottom:56px}
+  .cover-kicker{font-size:18px}
+  .envelope-open{width:82%;margin-top:96px}
+  .cover h1{margin-top:64px;font-size:clamp(38px,11vw,46px)}
+  .wedding-info{padding-top:0}
+  .invitation-panel,.reception-panel,.timeline-panel{width:88%;max-width:420px;padding:36px 20px 40px}
+  .reception-section{width:88%;max-width:420px;margin-bottom:16px;padding:0}
+  .reception-panel{width:100%;padding:36px 20px 40px}
+  .album-section{padding:40px 24px}
+  .album-grid{max-width:380px;gap:16px}
+  .map-section{padding:32px 24px 36px}
+  .map-frame{height:268px}
+  .dress-section{padding:40px 24px}
+  .timeline-section{width:88%;max-width:420px;margin:16px auto;padding:0}
+  .timeline-panel{width:100%;padding:36px 24px}
+  .guestbook-section{padding:0 24px 32px}
+  .gift-section{padding:32px 24px 40px}
+}
+
+/* Final overrides: restore the former cover and carousel after the demo styles. */
+.cover{min-height:100vh;min-height:100svh;padding:60px 36px 56px;justify-content:center}
+.cover.is-open{min-height:100vh;min-height:100svh;padding:60px 36px 56px}
+.cover-kicker{font-size:clamp(24px,6vw,34px);letter-spacing:.12em}
+.envelope-open{width:min(92vw,680px);max-width:680px;margin-top:72px;aspect-ratio:736/490}
+.envelope-art{aspect-ratio:736/490;overflow:visible;border-radius:3px;background:#681523;box-shadow:0 18px 34px #26080e45}
+.envelope-bg{inset:0;right:auto;bottom:auto;height:100%;object-fit:cover}
+.envelope-cover-art,.cover.is-opening .envelope-cover-art{display:none!important;opacity:0!important}
+.cover h1{gap:22px;margin-top:80px;font-size:58px}
+.cover h1 i{font-size:120px}
+.album-section{max-width:920px;margin:0 auto;padding:44px 24px 56px}
+.album-viewer{height:clamp(360px,62vw,520px);overflow:visible}
+.album-stack{perspective:1000px;transform-style:preserve-3d}
+.album-card{position:absolute;left:50%;display:grid;width:auto;height:92%;aspect-ratio:2/3;padding:0;place-items:center;overflow:hidden;border:8px solid #fff;border-radius:10px;background:linear-gradient(145deg,#f8f3ec,#ded2c3);box-shadow:0 12px 30px #29101238;transform-style:preserve-3d;transition:transform 1.1s ease,opacity .35s ease,filter .35s ease;cursor:pointer;backface-visibility:hidden;user-select:none}
+.album-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:none}
+.album-card.is-active{box-shadow:0 16px 38px #29101250}
+.album-card:not(.is-active){filter:saturate(.82)}
+.album-thumbs{display:flex;justify-content:center;gap:10px;margin:12px auto}
+.album-thumbs button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:currentColor;color:var(--wine);opacity:.25;transition:opacity .25s,transform .25s}
+.album-thumbs button.active{opacity:.9;transform:scale(1.3)}
+.album-count{position:absolute;right:8px;bottom:0;color:rgba(81,20,25,.65);font-size:11px}
+.album-arrow{display:none}
+@media(min-width:768px){.album-viewer{height:520px}.album-arrow{display:flex}}
+.cover.is-open{min-height:0;padding:60px 36px 56px;justify-content:flex-start}
+.cover.is-open .cover-kicker{font-size:18px;line-height:1.3;letter-spacing:.16em}
+.cover.is-open .envelope-open{width:min(82%,330px);max-width:330px;margin-top:96px;aspect-ratio:333/384}
+.cover.is-open .envelope-art{aspect-ratio:333/384;overflow:visible;border-radius:0;background:transparent;box-shadow:none}
+.cover.is-open .envelope-bg{inset:0;right:auto;bottom:auto;height:100%;object-fit:cover}
+.cover.is-open h1{gap:22px;margin-top:64px;font-size:clamp(38px,11vw,46px);line-height:1}
+.cover.is-open h1 i{font-size:92px}
+@media(min-width:768px){
+  .cover.is-open{min-height:0;padding:60px 36px 56px}
+  .cover.is-open .envelope-open{width:min(82%,420px);max-width:420px;margin-top:112px}
+  .cover.is-open h1{margin-top:80px;font-size:58px}
+  .cover.is-open h1 i{font-size:120px}
+}
+@media(max-width:650px){
+  .cover{padding:48px 22px 38px}
+  .cover.is-open{padding:48px 22px 38px}
+  .cover-kicker{font-size:clamp(24px,7vw,30px)}
+  .envelope-open{width:min(92vw,680px);margin-top:36px}
+  .cover h1{margin-top:36px;font-size:clamp(36px,10vw,44px)}
+  .cover h1 i{font-size:92px}
+  .cover.is-open{min-height:0;padding:60px 36px 56px}
+  .cover.is-open .envelope-open{width:82%;margin-top:96px}
+  .cover.is-open h1{margin-top:64px;font-size:clamp(38px,11vw,46px)}
+  .album-section{padding:34px 18px 42px}
+  .album-viewer{height:340px}
+  .album-arrow{display:none}
+}
+
+/* Stationary envelope: open the flap, slide the photo out, then show the hearts. */
+.cover.is-opening,.cover.is-open{overflow:visible}
+.cover.is-opening .envelope-open,.cover.is-open .envelope-open{position:relative;inset:auto;width:min(92vw,680px);height:auto;max-width:680px;aspect-ratio:1013/1198;margin:96px 0 0;transform:none;animation:none}
+.cover.is-opening .envelope-art,.cover.is-open .envelope-art{width:100%;height:100%;aspect-ratio:1013/1198;overflow:visible;background:none;box-shadow:none}
+.cover.is-opening .envelope-bg,.cover.is-open .envelope-bg{top:0;bottom:0;height:90%;object-fit:fill;object-position:center;opacity:1}
+.cover.is-opening .envelope-closed-body,.cover.is-open .envelope-closed-body{opacity:0}
+.cover.is-opening .envelope-flap,.cover.is-open .envelope-flap{visibility:hidden;opacity:0;transform:none}
+.cover.is-opening .envelope-photo-float,.cover.is-open .envelope-photo-float{top:-6%;left:26%;width:65%;z-index:25;opacity:0;animation:none;transform-origin:50% 100%}
+.envelope-photo{aspect-ratio:auto;object-fit:contain;transform:none;border:5px solid #fff;border-radius:0;box-shadow:0 8px 20px #0004}
+.cover.is-open .envelope-photo-float{opacity:1;animation:none;transform:rotate(10deg)}
+.cover.is-opening .envelope-cover-art,.cover.is-open .envelope-cover-art{top:auto;right:0;bottom:0;left:0;z-index:30;display:block!important;width:100%;height:auto;opacity:1!important;clip-path:none!important}
+.cover.is-opening .envelope-flower,.cover.is-open .envelope-flower{top:-13%;left:12%;z-index:26;width:42%;opacity:0;animation:none;transform-origin:50% 100%;transform:rotate(-22deg)}
+.cover.is-opening.is-photo-revealing .envelope-photo-float{opacity:1;animation:photoFadeIn 1.55s cubic-bezier(.22,.75,.25,1) both,openingPhotoPulse 5s ease-in-out 1.55s infinite;will-change:transform,opacity}
+.cover.is-opening.is-decoration-revealing .envelope-flower{opacity:1;animation:flowerFadeIn 1.55s .2s cubic-bezier(.22,.75,.25,1) both,openingFlowerPulse 5s ease-in-out 1.75s infinite;will-change:transform,opacity}
+.cover.is-open .envelope-flower{opacity:1;animation:openingFlowerPulse 5s ease-in-out infinite;transform:rotate(-22deg)}
+.cover.is-open .envelope-photo-float{animation:openingPhotoPulse 5s ease-in-out infinite;transform:rotate(10deg)}
+@media(max-width:767px){
+  .cover.is-opening.is-photo-revealing .envelope-photo-float{animation:photoFadeIn 1.55s cubic-bezier(.22,.75,.25,1) both,openingPhotoPulse 5s ease-in-out 1.55s infinite}
+  .cover.is-opening.is-decoration-revealing .envelope-flower{animation:flowerFadeIn 1.55s .2s cubic-bezier(.22,.75,.25,1) both,openingFlowerPulse 5s ease-in-out 1.75s infinite}
+  .cover.is-open .envelope-photo-float{animation:openingPhotoPulse 5s ease-in-out infinite}
+  .cover.is-open .envelope-flower{animation:openingFlowerPulse 5s ease-in-out infinite}
+}
+@keyframes photoFadeIn{from{opacity:0;transform:translateY(55%) rotate(10deg) scale(.96)}to{opacity:1;transform:translateY(0) rotate(10deg) scale(1)}}
+@keyframes flowerFadeIn{from{opacity:0;transform:translateY(45%) rotate(-22deg) scale(.92)}to{opacity:1;transform:translateY(0) rotate(-22deg) scale(1)}}
+@keyframes openingPhotoPulse{0%,100%{transform:rotate(10deg) scale(1)}50%{transform:rotate(10deg) scale(1.012)}}
+@keyframes openingFlowerPulse{0%,100%{transform:rotate(-22deg) scale(1)}50%{transform:rotate(-22deg) scale(1.015)}}
+@media(prefers-reduced-motion:reduce){.cover.is-opening.is-photo-revealing .envelope-photo-float,.cover.is-opening.is-decoration-revealing .envelope-flower,.cover.is-open .envelope-photo-float,.cover.is-open .envelope-flower{animation:none!important}}
+.heart-burst span{color:#e21a2c;font-size:clamp(30px,5vw,52px);text-shadow:0 2px 8px #68152380;animation-duration:2.5s}
+
+/* Let the castle artwork fill the entire opening viewport. */
+.cover-castle{position:fixed;top:0;left:50%;width:100vw;height:100svh;max-width:none;transform:translateX(-50%);object-fit:cover;object-position:center center}
+.paper-grain{position:fixed;inset:0;width:100vw;height:100vh;height:100svh}
+body{background:#fff}
+.paper-grain:before{opacity:0}
+.cover-castle{opacity:.08}
+.cover-kicker{display:flex;width:100%;flex-direction:column;align-items:center;justify-content:center;gap:0;margin:0 0 12px;color:#625c49;line-height:.9;letter-spacing:0;text-transform:none}
+.cover-kicker-script{position:relative;z-index:2;margin-bottom:-20px;color:#625c49;font:400 clamp(68px,15vw,132px)/.95 "Ms Madi","The Nautigal",cursive;letter-spacing:-.055em;text-transform:none}
+.cover-kicker-title{position:relative;z-index:1;color:#625c49;font:400 clamp(58px,12vw,104px)/.9 "Cormorant Garamond",Georgia,serif;letter-spacing:-.055em;text-transform:uppercase}
+
+/* Post-open content styling and scroll reveal. */
+#site:not([hidden]){animation:pageIn 1s cubic-bezier(.22,1,.36,1) both}
+#site>section{opacity:0;transform:translateY(18px);transition:opacity .95s cubic-bezier(.22,1,.36,1),transform 1.05s cubic-bezier(.22,1,.36,1)}
+#site>section.is-visible{opacity:1;transform:translateY(0)}
+.wedding-info,.reception-section,.map-section,.dress-section,.timeline-section,.guestbook-section,.gift-section{scroll-margin-top:24px}
+@media(max-width:767px){.cover.is-opening .envelope-open,.cover.is-open .envelope-open{width:min(92vw,520px);margin-top:360px}}
+@media(max-width:650px){.invitation-panel,.reception-panel,.timeline-panel{width:min(92%,560px);padding:30px 20px 36px}.family-grid{column-gap:clamp(12px,4vw,24px)}.album-section{padding-inline:18px}}
+
+/* Wedding details: clearer type scale with the same formal serif style. */
+.invitation-panel .panel-title,.reception-panel .panel-title{font:600 clamp(21px,3.4vw,26px)/1.25 "Cormorant Garamond",Georgia,serif;letter-spacing:.08em}
+.family-grid{font-family:"Cormorant Garamond",Georgia,serif}
+.family-grid article>span{font-size:15px;line-height:1.35}
+.family-grid article>strong{font-size:clamp(14px,2.2vw,17px);font-weight:600;line-height:1.35}
+.family-grid article>p{font-size:14px;line-height:1.4}
+.announce{font:500 clamp(14px,2.3vw,16px)/1.55 "Cormorant Garamond",Georgia,serif;letter-spacing:.07em}
+.couple-names h3{font-size:clamp(48px,8vw,60px);line-height:1.1}
+.couple-names p{font:500 13px/1.4 "Cormorant Garamond",Georgia,serif;letter-spacing:.16em}
+.ceremony-info>p{font:500 clamp(16px,2.6vw,19px)/1.55 "Cormorant Garamond",Georgia,serif;letter-spacing:.06em}
+.ceremony-time,.reception-time{font:500 15px/1.4 "Cormorant Garamond",Georgia,serif;letter-spacing:.08em}
+.ceremony-date>strong,.reception-date>strong{font-size:clamp(44px,7vw,52px)}
+.date-month b:first-child{font-size:14px}
+.date-month b:last-child{font-size:20px}
+.ceremony-info>small,.lunar-date{font:500 13px/1.5 "Cormorant Garamond",Georgia,serif;letter-spacing:.08em}
+.reception-panel h3{font:500 clamp(17px,2.6vw,20px)/1.45 "Cormorant Garamond",Georgia,serif}
+.schedule-pills span{font-size:14px}
+.schedule-pills strong{font-size:20px}
+@media(max-width:650px){
+  .family-grid article>span{font-size:14px}
+  .family-grid article>strong{font-size:14px}
+  .family-grid article>p{font-size:12px}
+  .couple-names h3{font-size:clamp(44px,12vw,54px)}
+  .ceremony-time,.reception-time{font-size:13px;letter-spacing:.04em}
+  .ceremony-date>strong,.reception-date>strong{font-size:44px}
+  .date-month b:first-child{font-size:13px}
+  .date-month b:last-child{font-size:18px}
+}
+
+/* One floral decoration for each event panel, placed in opposite corners. */
+.invitation-panel>.panel-flower,.reception-panel>.panel-flower{z-index:1;width:auto;height:210px;max-width:none;object-fit:contain;opacity:1;filter:drop-shadow(0 1px 2px rgba(52,24,16,.4)) drop-shadow(0 0 4px rgba(81,20,25,.2));animation:none}
+.invitation-panel>.panel-flower-left{top:-5%;left:-10px;right:auto;bottom:auto;transform:translateX(-6%) rotate(25deg)}
+.reception-panel>.panel-flower-reception{top:auto;right:-10px;bottom:-5%;left:auto;transform:translateX(6%) rotate(-25deg)}
+.invitation-panel,.reception-panel{overflow:visible}
+.invitation-panel>*:not(.panel-flower),.reception-panel>*:not(.panel-flower){z-index:2}
+@media(min-width:768px){.invitation-panel>.panel-flower,.reception-panel>.panel-flower{height:360px}.invitation-panel>.panel-flower-left{top:10%;left:-11%;transform:translateX(-11%) rotate(10deg)}.reception-panel>.panel-flower-reception{top:auto;right:-10%;bottom:30%;left:auto;transform:translateX(11%) rotate(-10deg)}}
+
+/* Balanced type scale for the reception details card */
+.reception-panel{gap:clamp(16px,2.2vw,21px);padding:clamp(30px,5vw,40px) clamp(18px,4vw,28px) clamp(32px,5vw,40px)}
+.reception-panel>.panel-title{font-size:clamp(19px,2.8vw,24px);line-height:1.22}
+.reception-panel h3{font-size:clamp(16px,2.1vw,18px);line-height:1.4}
+.reception-time{gap:clamp(16px,3vw,24px);font-size:clamp(13px,1.7vw,14px);line-height:1.35}
+.reception-date{gap:clamp(12px,2vw,16px)}
+.reception-date>strong{font-size:clamp(42px,6vw,48px)}
+.reception-date .date-month b:first-child{font-size:clamp(12px,1.6vw,13px)}
+.reception-date .date-month b:last-child{font-size:clamp(18px,2.3vw,20px)}
+.reception-panel .lunar-date{max-width:100%;font-size:clamp(12px,1.5vw,13px);line-height:1.45;letter-spacing:.06em}
+.reception-panel .schedule-pills{gap:clamp(24px,4vw,32px)}
+.reception-panel .schedule-pills span{font-size:clamp(12px,1.6vw,13px)}
+.reception-panel .schedule-pills strong{font-size:clamp(18px,2.2vw,20px)}
+.reception-panel .rsvp-link{font-size:13px}
+
+/* Match the ceremony and reception cards to the scale of the wedding page. */
+.invitation-panel,.reception-panel{gap:clamp(22px,3vw,30px);padding:clamp(38px,6vw,52px) clamp(24px,5vw,38px) clamp(42px,6vw,54px)}
+.invitation-panel>.panel-title,.reception-panel>.panel-title{font-size:clamp(24px,3.8vw,30px);line-height:1.2;letter-spacing:.09em}
+.invitation-panel .family-grid{column-gap:clamp(20px,4vw,36px);row-gap:14px}
+.invitation-panel .family-grid article>span{font-size:clamp(15px,1.9vw,17px)}
+.invitation-panel .family-grid article>strong{font-size:clamp(17px,2.2vw,20px);line-height:1.4}
+.invitation-panel .family-grid article>p{font-size:clamp(15px,1.9vw,17px);line-height:1.5}
+.invitation-panel .announce{font-size:clamp(17px,2.4vw,20px);line-height:1.65}
+.invitation-panel .couple-names h3{font-size:clamp(54px,8vw,68px);line-height:1.08}
+.invitation-panel .couple-names p{font-size:clamp(15px,1.8vw,17px)}
+.invitation-panel .couple-names>i{font-size:clamp(30px,4vw,38px)}
+.invitation-panel .ceremony-info{gap:clamp(18px,2.5vw,24px)}
+.invitation-panel .ceremony-info>p{font-size:clamp(19px,2.7vw,23px);line-height:1.55}
+.invitation-panel .ceremony-time{gap:clamp(24px,4vw,40px);font-size:clamp(15px,2vw,17px);letter-spacing:.07em}
+.invitation-panel .ceremony-date{gap:clamp(16px,2.5vw,22px)}
+.invitation-panel .ceremony-date>strong{font-size:clamp(54px,7vw,64px)}
+.invitation-panel .date-month b:first-child{font-size:clamp(15px,1.9vw,17px)}
+.invitation-panel .date-month b:last-child{font-size:clamp(21px,2.7vw,24px)}
+.invitation-panel .ceremony-info>small{font-size:clamp(14px,1.8vw,16px);line-height:1.5}
+.reception-panel{gap:clamp(20px,2.7vw,26px)}
+.reception-panel>.panel-title{font-size:clamp(24px,3.8vw,30px)}
+.reception-panel h3{font-size:clamp(19px,2.7vw,23px);line-height:1.4}
+.reception-time{font-size:clamp(15px,2vw,17px)}
+.reception-date>strong{font-size:clamp(52px,7vw,62px)}
+.reception-date .date-month b:first-child{font-size:clamp(15px,1.9vw,17px)}
+.reception-date .date-month b:last-child{font-size:clamp(21px,2.7vw,24px)}
+.reception-panel .lunar-date{font-size:clamp(14px,1.8vw,16px)}
+.reception-panel .schedule-pills span{font-size:clamp(14px,1.8vw,16px)}
+.reception-panel .schedule-pills strong{font-size:clamp(21px,2.7vw,24px)}
+.reception-panel .rsvp-link{font-size:15px}
+@media(max-width:650px){
+  .invitation-panel,.reception-panel{gap:22px;padding:34px 20px 40px}
+  .invitation-panel>.panel-title,.reception-panel>.panel-title{font-size:clamp(22px,6vw,27px)}
+  .invitation-panel .family-grid article>span{font-size:14px}
+  .invitation-panel .family-grid article>strong{font-size:clamp(15px,4vw,18px)}
+  .invitation-panel .family-grid article>p{font-size:14px}
+  .invitation-panel .announce{font-size:16px;line-height:1.55}
+  .invitation-panel .couple-names h3{font-size:clamp(46px,12vw,58px)}
+  .invitation-panel .couple-names p{font-size:14px}
+  .invitation-panel .ceremony-info>p{font-size:clamp(17px,4.5vw,20px)}
+  .invitation-panel .ceremony-time{gap:20px;font-size:14px;letter-spacing:.04em}
+  .invitation-panel .ceremony-date>strong{font-size:52px}
+  .invitation-panel .date-month b:first-child{font-size:14px}
+  .invitation-panel .date-month b:last-child{font-size:21px}
+  .invitation-panel .ceremony-info>small{font-size:13px}
+  .reception-panel h3{font-size:18px}
+  .reception-date>strong{font-size:52px}
+  .reception-date .date-month b:first-child{font-size:14px}
+  .reception-date .date-month b:last-child{font-size:21px}
+  .reception-panel .lunar-date{font-size:13px}
+  .reception-panel .schedule-pills span{font-size:13px}
+  .reception-panel .schedule-pills strong{font-size:20px}
+}
+
+/* Consistent scale for the schedule and guestbook sections. */
+.timeline-panel{padding:clamp(40px,6vw,54px) clamp(26px,5vw,40px) clamp(44px,6vw,56px)}
+.timeline-panel>.panel-title{margin-bottom:clamp(30px,4vw,42px);font-size:clamp(25px,4vw,31px);line-height:1.2;letter-spacing:.09em}
+.timeline{position:relative;z-index:2;max-width:500px;grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr);gap:clamp(32px,5vw,42px) clamp(22px,4vw,34px)}
+.timeline li>time{font-size:clamp(18px,2.5vw,22px);line-height:1.35}
+.timeline li>time img{width:clamp(36px,5vw,44px);height:clamp(36px,5vw,44px)}
+.timeline-dot:after{width:12px;height:12px}
+.timeline li>span:last-child{font-size:clamp(17px,2.4vw,21px);line-height:1.45}
+.guestbook-section{padding:clamp(38px,6vw,58px) 24px clamp(42px,6vw,58px)}
+.guestbook-content{max-width:680px;padding:clamp(72px,10vw,100px) clamp(24px,5vw,40px) 36px}
+.guestbook-content>.section-title{font-size:clamp(27px,4.3vw,34px);letter-spacing:.09em}
+.wish-form{max-width:480px;gap:14px;margin-top:34px}
+.wish-form input,.wish-form textarea{height:62px;padding:14px 16px;font-size:clamp(16px,2vw,18px)}
+.wish-form textarea{height:110px;line-height:1.5}
+.wish-actions{margin-top:8px}
+.wish-submit{padding:11px 28px;font-size:15px}
+.wish-list{max-width:560px;margin-top:36px}
+.wish-list:empty{display:none}
+.wish-list article{padding:18px;font-size:16px;line-height:1.5}
+.wish-list time{font-size:13px}
+.wish-list p{line-height:1.6}
+@media(max-width:650px){
+  .timeline-panel{padding:34px 20px 40px}
+  .timeline-panel>.panel-title{margin-bottom:30px;font-size:clamp(23px,6vw,28px)}
+  .timeline{grid-template-columns:minmax(0,1fr) 14px minmax(0,1fr);column-gap:16px;row-gap:34px}
+  .timeline li>time{font-size:17px}
+  .timeline li>time img{flex-basis:30px;width:30px;height:30px}
+  .timeline li>span:last-child{font-size:15px}
+  .guestbook-section{padding:34px 18px 42px}
+  .guestbook-content{padding:70px 18px 28px}
+  .guestbook-content>.section-title{font-size:clamp(24px,7vw,30px)}
+  .wish-form{gap:12px;margin-top:28px}
+  .wish-form input,.wish-form textarea{height:58px;font-size:16px}
+  .wish-form textarea{height:100px}
+  .wish-submit{padding:10px 22px;font-size:14px}
+  .wish-list{margin-top:28px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#site>section{opacity:1;transform:none;transition:none}}
+
+/* Swap the opening title only after the envelope has finished opening. */
+.cover-kicker-after{display:none}
+.cover.is-opening .cover-kicker-script,.cover.is-open .cover-kicker-script,.cover.is-opening .cover-kicker-title,.cover.is-open .cover-kicker-title{display:none}
+.cover.is-opening .cover-kicker-after,.cover.is-open .cover-kicker-after{display:block;color:#590310;font:600 clamp(31.2px,7.8vw,44.2px)/1.2 "Cormorant Garamond",Georgia,serif;letter-spacing:.16em;text-align:center;text-transform:uppercase}
+@media(max-width:650px){.cover.is-opening .cover-kicker-after,.cover.is-open .cover-kicker-after{font-size:clamp(20px,6vw,30px)}}
+
+/* Reference 3D wedding gallery: natural photo ratios, layered cards and pill dots. */
+.album-section{max-width:none;margin:0 auto;padding:40px 24px;text-align:center}
+.album-section .section-title{color:var(--wine);font:700 20px/1.35 "Times New Roman",serif;letter-spacing:.03em;text-transform:uppercase}
+.album-viewer{width:100%;max-width:380px;height:340px;margin:20px auto 14px;overflow:visible;perspective:1200px;touch-action:pan-y}
+.album-stack{perspective:1200px;transform-style:preserve-3d}
+.album-card{position:absolute;left:50%;display:grid;width:auto;height:92%;aspect-ratio:2/3;padding:0;place-items:center;overflow:hidden;border:0;border-radius:16px;background:#f8f3ec;box-shadow:0 20px 25px -5px #0000001a,0 8px 10px -6px #0000001a;transform-style:preserve-3d;transition:transform 1.25s cubic-bezier(.22,.75,.2,1),opacity 1.05s ease,box-shadow .8s ease,filter .8s ease;cursor:pointer;backface-visibility:hidden;user-select:none;will-change:transform,opacity}
+.album-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.25s cubic-bezier(.22,.75,.2,1),filter .8s ease}
+.album-card.is-active{box-shadow:0 24px 45px -8px #29101255,0 0 0 3px #fff9;filter:saturate(1.06) brightness(1.02)}
+.album-card.is-active>img{animation:albumPhotoSettle 1.25s cubic-bezier(.22,.75,.2,1) both}
+@keyframes albumPhotoSettle{from{opacity:.85;transform:none}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.album-card.is-active>img{animation:none!important}}
+.album-card:not(.is-active){filter:none}
+.album-thumbs{display:flex;justify-content:center;gap:6px;margin:12px auto 0;color:var(--wine)}
+.album-thumbs button{width:8px;height:8px;padding:0;border:0;border-radius:999px;background:currentColor;opacity:.25;transition:width .3s ease,opacity .3s ease}
+.album-thumbs button.active{width:24px;opacity:.7;transform:none}
+.album-count{display:none}
+.album-arrow{top:50%;width:32px;height:32px;border-radius:50%;background:#ece4d899;color:var(--wine);font:400 24px/1 "Times New Roman",serif;transition:background .2s ease,transform .2s ease}
+.album-arrow.prev{left:0}.album-arrow.next{right:0}
+.album-arrow:hover{transform:translateY(-50%) scale(1.04);background:#ece4d8}
+.album-dialog{padding:48px 56px 24px;border-radius:16px;background:var(--cream);box-shadow:0 20px 60px #0008}
+.album-dialog::backdrop{background:#1a080bd9;backdrop-filter:blur(4px)}
+.album-dialog>img{width:100%;max-height:calc(92vh - 72px);object-fit:contain}
+.album-dialog-close,.album-dialog-arrow{background:var(--cream);color:var(--wine)}
+@media(min-width:768px){.album-viewer{max-width:600px;height:520px}.album-arrow{display:flex}}
+@media(max-width:767px){.album-section{padding:40px 24px}.album-viewer{max-width:380px;height:340px}.album-arrow{display:none}.album-dialog{width:96vw;max-height:94vh;padding:44px 36px 20px}.album-dialog>img{max-height:calc(94vh - 64px)}}
+
+/* Match the reference 3D album proportions and envelope gift interaction. */
+.album-viewer{max-width:420px}
+.album-card{transition:transform 1250ms cubic-bezier(.22,.75,.2,1),opacity 1050ms ease,box-shadow 800ms ease,filter 800ms ease;border-radius:16px}
+.album-card.is-active{box-shadow:0 20px 25px -5px #0000001a,0 8px 10px -6px #0000001a,0 0 0 2px #ffffff4d}
+.gift-teaser{z-index:1;width:min(100%,320px);max-width:320px;height:auto;margin:24px auto 0}
+.gift-envelope-button{display:flex;width:100%;flex-direction:column;align-items:center;padding:0;border:0;background:transparent;color:var(--wine);cursor:pointer}
+.gift-envelope-button:focus-visible{outline:2px solid #c9a24a;outline-offset:5px;border-radius:18px}
+.gift-envelopes{position:relative;display:grid;width:100%;height:290px;place-items:center;isolation:isolate}
+.gift-envelopes:before{position:absolute;z-index:-1;bottom:31px;left:50%;width:52%;height:22px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,#2a090e55 0%,#2a090e00 72%);content:"";animation:giftShadowPulse 3s ease-in-out infinite}
+.gift-envelopes .gift-front{position:relative;z-index:1;display:block;width:200px;height:270px;object-fit:contain;filter:drop-shadow(0 12px 14px #25080b35);transform-origin:50% 92%;will-change:transform;animation:giftEnvelopeFloat 3s ease-in-out infinite;transition:filter .35s ease}
+.gift-sparkle{position:absolute;z-index:2;color:#c9a24a;line-height:1;pointer-events:none;animation:giftSparkle 2s ease-in-out infinite}
+.gift-sparkle.sparkle-one{top:15%;left:18%;font-size:22px}
+.gift-sparkle.sparkle-two{top:26%;right:16%;font-size:17px;animation-delay:.6s}
+.gift-sparkle.sparkle-three{top:55%;left:12%;font-size:15px;animation-delay:1.2s}
+.gift-sparkle.sparkle-four{top:49%;right:11%;font-size:21px;animation-delay:1.7s}
+.gift-teaser:hover .gift-front,.gift-envelope-button:focus-visible .gift-front{animation:giftEnvelopeFloat 3s ease-in-out infinite,giftEnvelopeWave 1.1s ease-in-out .35s infinite}
+.gift-teaser.is-opening .gift-front{animation:giftEnvelopeClick .48s cubic-bezier(.22,1,.36,1) both;filter:drop-shadow(0 16px 18px #25080b45)}
+.gift-tap-hint{position:relative;z-index:2;margin-top:-2px;color:var(--wine);font:500 15px/1.4 "Cormorant Garamond",Georgia,serif;letter-spacing:.14em;text-transform:uppercase;animation:giftHintPulse 2s ease-in-out infinite}
+.gift-dialog[open]{animation:giftDialogIn .38s cubic-bezier(.22,1,.36,1) both}
+.gift-dialog .gift-accounts article{animation:giftAccountIn .45s cubic-bezier(.22,1,.36,1) both}
+.gift-dialog .gift-accounts article:nth-child(2){animation-delay:.08s}
+@keyframes giftEnvelopeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes giftEnvelopeWave{0%{transform:translateY(-3px) scale(1.12) rotate(0)}20%{transform:translateY(-3px) scale(1.12) rotate(-6deg)}40%{transform:translateY(-3px) scale(1.12) rotate(4.5deg)}60%{transform:translateY(-3px) scale(1.12) rotate(-3deg)}80%{transform:translateY(-3px) scale(1.12) rotate(1.5deg)}100%{transform:translateY(-3px) scale(1.12) rotate(0)}}
+@keyframes giftEnvelopeClick{0%{transform:translateY(0) scale(1) rotate(0)}35%{transform:translateY(-12px) scale(1.1) rotate(-5deg)}68%{transform:translateY(-4px) scale(1.08) rotate(3deg)}100%{transform:translateY(-2px) scale(1.05) rotate(0)}}
+@keyframes giftShadowPulse{0%,100%{opacity:.28;transform:translateX(-50%) scaleX(1)}50%{opacity:.16;transform:translateX(-50%) scaleX(.9)}}
+@keyframes giftSparkle{0%,100%{opacity:0;transform:scale(.4) rotate(-15deg)}50%{opacity:.9;transform:scale(1.12) rotate(15deg)}}
+@keyframes giftHintPulse{0%,100%{opacity:.48}50%{opacity:1}}
+@keyframes giftDialogIn{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes giftAccountIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:768px){.album-viewer{max-width:620px}}
+@media(max-width:767px){.album-viewer{max-width:420px}.gift-envelope-button{min-height:0}.gift-envelopes{height:270px}.gift-envelopes .gift-front{width:184px;height:250px}.gift-dialog{inset:auto 0 0;margin:0;width:100%;max-width:none;max-height:90vh;border-radius:20px 20px 0 0}}
+@media(prefers-reduced-motion:reduce){.gift-envelopes:before,.gift-envelopes .gift-front,.gift-sparkle,.gift-tap-hint,.gift-dialog[open],.gift-dialog .gift-accounts article{animation:none!important}.album-card{transition-duration:.01ms!important}}
+
+/* Keep section reveals in normal flow so adjacent panels never slide over each other. */
+#site>section{transform:none;transition:opacity .85s cubic-bezier(.22,1,.36,1)}
+#site>section.is-visible{transform:none}
+.timeline-flower{z-index:0}
+.timeline-panel{z-index:1}
+@media(prefers-reduced-motion:reduce){#site>section{transition:none}}
+
+/* Wedding schedule: match the reception flower treatment, anchored at the lower right. */
+.timeline-section{overflow:visible}
+.timeline-panel{overflow:visible}
+.timeline-panel>.timeline-flower{position:absolute;z-index:1;top:auto;right:-10px;bottom:-5%;left:auto;width:auto;height:210px;max-width:none;opacity:1;object-fit:contain;transform:translateX(6%) rotate(-15deg);filter:drop-shadow(0 1px 2px rgba(52,24,16,.4)) drop-shadow(0 0 4px rgba(81,20,25,.2));animation:none}
+.timeline-panel>.panel-title,.timeline-panel>.timeline{z-index:2}
+.timeline li>time{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.timeline li>time img{position:static;top:auto;right:auto;flex:0 0 clamp(30px,3.2vw,36px);width:clamp(30px,3.2vw,36px);height:clamp(30px,3.2vw,36px);transform:none;object-fit:contain}
+@media(max-width:650px){
+  .timeline li>time img{flex-basis:30px;width:30px;height:30px}
+}
+/* Distinct floral compositions for each wedding section. */
+.invitation-panel>.panel-flower-left{top:4%;left:-8%;right:auto;bottom:auto;width:auto;height:clamp(210px,40vw,360px);opacity:.82;transform:rotate(-6deg)}
+.reception-panel>.panel-flower-reception{top:auto;right:-6%;bottom:-5%;left:auto;width:clamp(170px,38vw,340px);height:auto;opacity:.9;transform:none}
+.timeline-panel>.timeline-flower{top:-9%;right:-7%;bottom:auto;width:clamp(286px,84.5vw,416px);height:auto;opacity:.34;transform:none}
+.invitation-panel>.panel-flower-left,.reception-panel>.panel-flower-reception{opacity:1;filter:saturate(1.06) contrast(1.04) drop-shadow(0 2px 4px rgba(30,8,12,.36))}
+.timeline-panel>.timeline-flower{opacity:.62;filter:saturate(1.06) contrast(1.04) drop-shadow(0 2px 4px rgba(30,8,12,.36))}
+@media(max-width:767px){
+  .invitation-panel>.panel-flower-left{height:210px}
+  .reception-panel>.panel-flower-reception{bottom:-3%;width:clamp(155px,44vw,210px)}
+  .timeline-panel>.timeline-flower{width:clamp(286px,84.5vw,416px)}
+}
+@media(min-width:768px){
+  .invitation-panel>.panel-flower-left{height:360px}
+  .reception-panel>.panel-flower-reception{width:min(340px,38vw)}
+  .timeline-panel>.timeline-flower{width:min(442px,54.6vw)}
+}
+
+/* Keep ceremony copy clear and tighten type on narrow screens. */
+.invitation-panel>.panel-flower-left{top:-10px;left:-10px;right:auto;bottom:auto;height:clamp(175px,24vw,240px);opacity:.92;transform:rotate(-8deg);transform-origin:top left}
+.timeline-panel>.timeline-flower{opacity:1;filter:saturate(1.06) contrast(1.04) drop-shadow(0 2px 4px rgba(30,8,12,.36))}
+@media(max-width:650px){
+  .invitation-panel{gap:16px;padding:28px 18px 32px}
+  .invitation-panel>.panel-flower-left{top:-8px;left:-8px;height:165px;opacity:.88}
+  .invitation-panel>.panel-title,.reception-panel>.panel-title{font-size:clamp(19px,5.2vw,22px);letter-spacing:.04em}
+  .invitation-panel .family-grid{column-gap:clamp(12px,4vw,18px)}
+  .invitation-panel .family-grid article>span{font-size:12px}
+  .invitation-panel .family-grid article>strong{font-size:clamp(12px,3.5vw,14px);line-height:1.3}
+  .invitation-panel .family-grid article>p{font-size:11px;line-height:1.25}
+  .invitation-panel .announce{font-size:13px;line-height:1.4}
+  .invitation-panel .couple-names{gap:5px}
+  .invitation-panel .couple-names h3{width:100%;min-height:54px;font-size:clamp(34px,9vw,40px);line-height:1.08}
+  .invitation-panel .couple-names i{font-size:28px}
+  .invitation-panel .ceremony-info{gap:12px}
+  .invitation-panel .ceremony-info>p{font-size:15px;line-height:1.4}
+  .invitation-panel .ceremony-time{gap:12px;font-size:11px;letter-spacing:.02em}
+  .invitation-panel .ceremony-date,.reception-panel .reception-date{gap:10px}
+  .invitation-panel .ceremony-date>strong,.reception-panel .reception-date>strong{font-size:40px}
+  .invitation-panel .date-divider,.reception-panel .date-divider{height:38px}
+  .invitation-panel .date-month b:first-child,.reception-panel .date-month b:first-child{font-size:11px}
+  .invitation-panel .date-month b:last-child,.reception-panel .date-month b:last-child{font-size:16px}
+  .invitation-panel .ceremony-info>small{font-size:11px}
+  .reception-panel{gap:16px;padding:28px 18px 32px}
+  .reception-panel h3{font-size:15px;line-height:1.35}
+  .reception-panel .reception-time{gap:12px;font-size:12px}
+  .reception-panel .lunar-date{font-size:11px}
+  .reception-panel .schedule-pills span{font-size:11px}
+  .reception-panel .schedule-pills strong{font-size:18px}
+}
+@media(max-width:650px){
+  .timeline-panel{padding:24px 12px 28px}
+  .timeline-panel>.panel-title{margin-bottom:18px;font-size:clamp(18px,4.8vw,21px);letter-spacing:.05em}
+  .timeline{grid-template-columns:minmax(0,1fr) 10px minmax(0,1fr);column-gap:9px;row-gap:18px}
+  .timeline li>time{gap:4px;font-size:12px;line-height:1.25}
+  .timeline li>time img{flex-basis:22px;width:22px;height:22px}
+  .timeline-dot:after{width:8px;height:8px}
+  .timeline li>span:last-child{font-size:11px;line-height:1.3}
+}
+
+/* Polished photo-deck transition, inspired by creative/stacked carousel patterns. */
+.album-viewer{perspective:1400px;isolation:isolate}
+.album-stack{transform-style:preserve-3d}
+.album-card{overflow:hidden;border:1px solid rgba(255,255,255,.82);border-radius:18px;transition:transform 1.3s cubic-bezier(.2,.85,.22,1),opacity 1.1s ease,box-shadow .8s ease,filter .8s ease;will-change:transform,opacity}
+.album-card::after{position:absolute;inset:-35% auto -35% -80%;width:45%;transform:translateX(-160%) rotate(18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);content:"";pointer-events:none;opacity:0}
+.album-card.is-active{box-shadow:0 26px 48px -12px rgba(43,10,15,.48),0 0 0 3px rgba(255,255,255,.85),0 0 28px rgba(175,116,76,.18);filter:saturate(1.08) contrast(1.015)}
+.album-card.is-active::after{animation:albumCardSheen 1.25s .12s cubic-bezier(.18,.7,.22,1) both}
+.album-card>img{transition:transform 1.3s cubic-bezier(.2,.85,.22,1),filter .8s ease}
+.album-card.is-active>img{animation:albumPhotoSettle 1.3s cubic-bezier(.2,.85,.22,1) both}
+@keyframes albumCardSheen{0%{opacity:0;transform:translateX(-160%) rotate(18deg)}22%{opacity:.85}100%{opacity:0;transform:translateX(520%) rotate(18deg)}}
+.album-arrow{width:40px;height:40px;background:rgba(250,246,237,.9);box-shadow:0 4px 16px rgba(40,18,14,.16);backdrop-filter:blur(6px)}
+.album-arrow:hover{transform:translateY(-50%) scale(1.1);box-shadow:0 7px 20px rgba(40,18,14,.22)}
+.album-thumbs button.active{background:var(--wine);box-shadow:0 0 0 3px rgba(111,24,38,.12)}
+@media(max-width:767px){.album-card{border-radius:14px}.album-arrow{width:36px;height:36px}}
+@media(prefers-reduced-motion:reduce){.album-card.is-active::after,.album-card.is-active>img{animation:none!important}}
+
+/* Ceremony bouquet sits in the upper-left corner behind the invitation details. */
+.invitation-panel>.panel-flower-left{z-index:0;top:clamp(18px,2vw,28px);left:0;right:auto;bottom:auto;height:clamp(135px,22vw,190px);opacity:.68;transform:rotate(-8deg);transform-origin:top left}
+.invitation-panel>.panel-flower-left{opacity:1;filter:saturate(1.06) contrast(1.04) drop-shadow(0 2px 4px rgba(30,8,12,.36))}
+.invitation-panel>:not(.panel-flower-left){z-index:2}
+
+/* Mobile refinements: keep the ceremony copy clear and tighten the open cover. */
+@media(max-width:650px){
+  .invitation-panel>.panel-flower-left{top:18px;left:0;height:clamp(115px,36vw,145px);opacity:1}
+  .cover.is-opening .cover-kicker-after,.cover.is-open .cover-kicker-after{font-size:clamp(23.4px,6.5vw,28.6px);line-height:1.1;letter-spacing:.06em;white-space:nowrap}
+}
+@media(max-width:767px){.cover.is-opening .envelope-open,.cover.is-open .envelope-open{margin-top:28px}}
+
+/* Gentle falling hearts begin after the invitation opens. */
+.heart-rain{position:fixed;inset:0;z-index:70;width:100vw;height:100vh;height:100svh;overflow:hidden;visibility:hidden;pointer-events:none}
+.heart-rain.is-active{visibility:visible}
+.heart-rain__heart{position:absolute;top:-8vh;left:var(--heart-left);color:#a83e50;font-size:var(--heart-size);line-height:1;text-shadow:0 1px 4px rgba(255,239,226,.65);opacity:var(--heart-opacity);animation:heartRainFall var(--heart-duration) linear var(--heart-delay) infinite;will-change:transform,opacity}
+.heart-rain__pulse{display:block;transform-origin:center;animation:heartPulse var(--pulse-duration) ease-in-out var(--pulse-delay) infinite}
+@keyframes heartPulse{0%,100%{transform:scale(.82)}50%{transform:scale(1.24)}}
+@keyframes heartRainFall{
+  0%{opacity:0;transform:translate3d(0,-8vh,0) rotate(-18deg) scale(.82)}
+  8%{opacity:var(--heart-opacity)}
+  92%{opacity:var(--heart-opacity);transform:translate3d(var(--heart-drift),104vh,0) rotate(340deg) scale(1.05)}
+  100%{opacity:0;transform:translate3d(var(--heart-drift),110vh,0) rotate(360deg) scale(1.08)}
+}
+@media(prefers-reduced-motion:reduce){.heart-rain{display:none!important}}
+
+/* Give the opening envelope the same tactile lift and wobble as the gift envelope. */
+.envelope-open.is-tapped{animation:giftEnvelopeClick .48s cubic-bezier(.22,1,.36,1) both;filter:drop-shadow(0 16px 18px #25080b45);pointer-events:none}
+@media(prefers-reduced-motion:reduce){.envelope-open.is-tapped{animation:none!important;filter:none}}
+
+/* Clicked album photos open in a large viewer with selectable previews below. */
+.album-dialog[open]{display:flex;flex-direction:column;align-items:center;gap:10px;overflow:hidden}
+.album-dialog-gallery{display:flex;flex:1;flex-direction:column;align-items:center;gap:12px;width:100%;min-height:0}
+.album-dialog-gallery>img{display:block;flex:1;width:100%;min-height:0;max-height:calc(92vh - 170px);object-fit:contain}
+.album-dialog-thumbs{display:flex;flex:0 0 auto;align-items:center;justify-content:center;gap:9px;width:min(100%,720px);overflow-x:auto;padding:4px 4px 8px;scrollbar-width:thin;overscroll-behavior-x:contain}
+.album-dialog-thumb{flex:0 0 64px;width:64px;height:82px;padding:0;overflow:hidden;border:2px solid transparent;border-radius:8px;background:var(--paper);opacity:.72;transition:opacity .2s ease,border-color .2s ease,transform .2s ease}
+.album-dialog-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.album-dialog-thumb:hover{opacity:1;transform:translateY(-2px)}
+.album-dialog-thumb.active{border-color:var(--wine);opacity:1;box-shadow:0 0 0 2px rgba(81,20,25,.14)}
+.album-dialog-arrow{top:42%;z-index:2}
+.album-dialog-close{z-index:3}
+@media(max-width:767px){
+  .album-dialog[open]{width:96vw;max-height:94vh;max-height:94svh;padding:46px 12px 12px}
+  .album-dialog-gallery>img{flex:0 1 auto;height:auto;max-height:calc(94vh - 170px);max-height:calc(94svh - 170px)}
+  .album-dialog-thumbs{justify-content:flex-start;gap:7px}
+  .album-dialog-thumb{flex-basis:50px;width:50px;height:66px;border-radius:6px}
+  .album-dialog-arrow{top:40%;width:34px;height:34px}
+}
+
+/* Keep the guestbook form within the paper and give floral cutouts a softer edge. */
+.guestbook-section{padding:clamp(30px,4vw,46px) 18px 42px}
+.guestbook-art{top:-10px;width:min(108%,520px);opacity:.9}
+.guestbook-content{max-width:560px;padding:clamp(103px,8vw,112px) clamp(18px,4vw,36px) 32px}
+.guestbook-content>.section-title{transform:none}
+.wish-form{width:100%;max-width:340px;gap:12px;margin:26px auto 0}
+.wish-actions{justify-content:flex-end;gap:12px}
+.magic-button{display:grid;width:40px;height:40px;flex:0 0 40px;place-items:center;padding:0}
+.wish-form input,.wish-form textarea{height:54px;padding:12px 14px;font-size:16px}
+.wish-form textarea{height:88px}
+.wish-list{width:100%;max-width:340px;margin:30px auto 0}
+.wish-list article{padding:14px 16px}
+.magic-button svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.6}
+.wish-suggestions{display:grid;max-height:220px;gap:6px;overflow-y:auto;padding:2px}
+.wish-suggestions[hidden]{display:none}
+.wish-suggestion{padding:9px 11px;border:1px solid #51141935;border-radius:7px;background:#fff9;color:var(--wine);font:400 14px/1.4 var(--serif);text-align:left;cursor:pointer}
+.wish-suggestion:hover,.wish-suggestion:focus-visible{background:#51141912}
+@media(max-width:650px){
+  .guestbook-section{padding:28px 12px 34px}
+  .guestbook-art{top:40px;width:min(108%,620px)}
+  .guestbook-content{padding:103px 18px 28px}
+  .guestbook-content>.section-title{font-size:clamp(24px,7vw,30px)}
+  .wish-form{width:min(100%,205px);max-width:205px;gap:10px;margin:22px auto 0}
+  .wish-form input,.wish-form textarea{height:50px;padding:11px 12px}
+  .wish-form textarea{height:80px}
+  .wish-list{width:min(100%,205px);max-width:205px;margin:24px auto 0}
+}
+
+/* Blend the ceremony flower into the heading without covering the text. */
+.wedding-info{padding-top:0}
+.invitation-panel{overflow:visible}
+.invitation-panel>.panel-flower-left{z-index:0;top:-5%;left:-4%;width:120%;max-width:500px;height:auto;opacity:1;transform:none;filter:saturate(1.08) contrast(1.06) drop-shadow(0 2px 4px rgba(30,8,12,.36))}
+@media(max-width:650px){
+  .invitation-panel>.panel-flower-left{top:-5%;left:-4%;width:100%;max-width:420px;height:auto;opacity:.9;transform:none}
+}
+.invitation-shell,#site{overflow-x:clip;overflow-y:visible}
+.wedding-info>.wedding-botanical-frame3{position:absolute;z-index:1;bottom:-8%;left:48%;width:min(100%,900px);height:auto;transform:translateX(-50%);pointer-events:none}
+.wedding-info>.invitation-panel{z-index:auto}
+.wedding-info>.invitation-panel>*:not(.panel-flower){z-index:2}
+@media(max-width:650px){
+  .wedding-info>.wedding-botanical-frame3{bottom:0;left:50%;width:min(80%,300px)}
+}
+.album-section{margin-top:60px}
+.invitation-panel>.announce{margin-top:-4px}
+.invitation-panel>.couple-names{margin-top:-8px}
+.invitation-panel>.ceremony-info{margin-top:-8px}
+.invitation-panel .ceremony-info>small{margin-top:-8px}
+.wedding-countdown{position:relative;z-index:1;width:min(88%,560px);margin:28px auto 0;padding:22px 18px;border:1px solid rgba(201,162,74,.45);border-radius:13px;background:var(--wine);box-shadow:0 8px 22px rgba(41,16,18,.16);color:var(--paper);text-align:center}
+.wedding-countdown h2{margin:0;color:var(--paper);font:600 clamp(16px,2.3vw,18px)/1.35 var(--serif);letter-spacing:.08em}
+.countdown-date{display:block;margin-top:5px;color:var(--muted);font:400 13px/1.4 var(--baskerville);letter-spacing:.06em}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:18px}
+.countdown-unit{display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;border:1px solid rgba(236,228,216,.2);border-radius:8px;background:rgba(236,228,216,.08)}
+.countdown-unit strong{font:400 clamp(25px,5.5vw,38px)/1 var(--serif);font-variant-numeric:tabular-nums}
+.countdown-unit span{color:var(--muted);font:400 11px/1.3 var(--baskerville);letter-spacing:.08em;text-transform:uppercase}
+.countdown-status{margin:16px 0 0;color:var(--paper);font:500 16px/1.4 var(--baskerville)}
+@media(max-width:650px){
+  .wedding-countdown{width:min(92%,560px);margin-top:20px;padding:18px 12px}
+  .countdown-grid{gap:6px;margin-top:14px}
+  .countdown-unit{gap:3px;padding:9px 2px}
+  .countdown-unit strong{font-size:clamp(24px,6vw,30px)}
+  .countdown-unit span{font-size:clamp(9px,2.5vw,10px);letter-spacing:.04em}
+}
+@media(max-width:350px){
+  .wedding-countdown{padding-inline:9px}
+  .countdown-grid{gap:4px}
+  .countdown-unit strong{font-size:24px}
+}
+@media(min-width:768px){
+  .wedding-countdown{margin-top:calc(28px + 10vh)}
+}
+
+/* Keep Vietnamese glyphs on their matching local font subsets and mobile copy readable. */
+body{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.panel-title,.section-title,.album-section .section-title{font-family:"Cormorant Garamond",Georgia,serif}
+@media(max-width:650px){
+  .invitation-panel .family-grid article>span{font-size:13px}
+  .invitation-panel .family-grid article>strong{font-size:clamp(13px,3.5vw,15px)}
+  .invitation-panel .announce{font-size:14px;line-height:1.5}
+  .invitation-panel .ceremony-time{font-size:13px}
+  .invitation-panel .date-month b:first-child,.reception-panel .date-month b:first-child{font-size:12px}
+  .invitation-panel .ceremony-info>small,.reception-panel .lunar-date{font-size:12px}
+  .reception-panel h3{font-size:16px}
+  .reception-panel .reception-time{font-size:13px}
+  .reception-panel .schedule-pills span{font-size:12px}
+  .reception-panel .venue-address{font-size:14px;line-height:1.55}
+  .timeline li>time{font-size:13px}
+  .timeline li>span:last-child{font-size:12px}
+  .countdown-unit span{font-size:12px}
+  .rsvp-form label{font-size:13px}
+}
+
+.ceremony-time,.reception-time,.ceremony-info>small,.lunar-date,.wedding-countdown,.wedding-countdown h2,.countdown-date,.countdown-unit strong,.countdown-unit span,.countdown-status,.schedule-pills,.schedule-pills span,.schedule-pills strong,.reception-panel .venue-address,.timeline-section .panel-title,.timeline,.timeline li,.timeline li>time,.timeline li>span:last-child{font-family:"Source Serif 4","Cormorant Garamond",Georgia,serif}
+.invitation-panel .ceremony-date,.reception-panel .reception-date{font-family:"Source Serif 4","Cormorant Garamond",Georgia,serif}
+.invitation-panel .ceremony-date>strong,.reception-panel .reception-date>strong{font-family:"Source Serif 4","Cormorant Garamond",Georgia,serif;font-weight:400;font-variant-numeric:lining-nums}
+.invitation-panel .ceremony-date .date-month b,.reception-panel .reception-date .date-month b{font-family:"Source Serif 4","Cormorant Garamond",Georgia,serif;font-weight:400}
+.ceremony-info>small,.lunar-date{font-weight:400}
+.ceremony-info>small,.lunar-date{max-width:100%;letter-spacing:.01em;text-align:center;text-transform:none}
+@font-face{font-family:"Source Serif 4";src:url("assets/fonts/source-serif-4/SourceSerif4-latin.woff2") format("woff2");font-weight:300 700;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Source Serif 4";src:url("assets/fonts/source-serif-4/SourceSerif4-vietnamese.woff2") format("woff2");font-weight:300 700;font-display:swap;unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
+@media(max-width:650px){
+  .invitation-panel .ceremony-date .date-month b:first-child,.reception-panel .reception-date .date-month b:first-child{font-size:13px;font-weight:400}
+  .invitation-panel .ceremony-date .date-month b:last-child,.reception-panel .reception-date .date-month b:last-child{font-size:18px;font-weight:400}
+  .invitation-panel .ceremony-info>small,.reception-panel .lunar-date{font-size:12px;letter-spacing:.01em;text-transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .album-card{transition-duration:450ms,300ms,300ms,300ms!important}
+}
+@media(max-width:650px){
+  .wedding-countdown{width:min(96%,560px);padding:16px 12px}
+  .wedding-countdown h2{font-size:clamp(14px,3.6vw,17px);line-height:1.3;letter-spacing:.03em}
+  .countdown-date{letter-spacing:.02em}
+  .countdown-grid{gap:clamp(4px,1.5vw,8px)}
+  .countdown-unit{padding-inline:clamp(2px,1vw,6px)}
+}
+.reception-panel .venue-address{max-width:440px;color:var(--paper);font-size:clamp(15px,3.8vw,17px);line-height:1.55}
+.reception-panel .map-frame{width:100%;max-width:100%;height:220px}
+.timeline-section{margin-top:120px}
+
+/* Keep the newly added floral decor inside each card frame. */
+.invitation-panel,.reception-panel,.timeline-panel{overflow:hidden}
+.invitation-panel>.panel-flower-left{
+  top:-8px;
+  left:-10px;
+  width:clamp(150px,42vw,300px);
+  max-width:72%;
+  height:auto;
+  transform:rotate(-8deg);
+  transform-origin:top left;
+}
+.reception-panel>.panel-flower-reception{
+  z-index:5;
+  display:block;
+  top:-7%;
+  left:0;
+  right:auto;
+  bottom:auto;
+  width:clamp(170px,44vw,280px);
+  max-width:76%;
+  height:auto;
+  opacity:1;
+  transform:scaleX(-1);
+  transform-origin:top left;
+}
+.timeline-panel>.timeline-flower{
+  top:-8px;
+  right:-8px;
+  width:clamp(145px,38vw,250px);
+  max-width:68%;
+  height:auto;
+  opacity:.78;
+  transform:scaleX(-1);
+  transform-origin:top right;
+}
+.wedding-info>.wedding-botanical-frame3{
+  bottom:-2%;
+  left:50%;
+  width:min(88%,560px);
+  max-width:100%;
+}
+.guestbook-art{
+  top:-22px;
+  left:45%;
+  width:min(128%,700px);
+  max-width:none;
+  transform:translateX(-50%);
+}
+.guestbook-content{padding-top:clamp(125px,10vw,145px);padding-bottom:48px}
+@media(max-width:650px){
+  .invitation-panel>.panel-flower-left{top:-6px;left:-7px;width:clamp(125px,43vw,190px);max-width:68%}
+  .reception-panel>.panel-flower-reception{top:0;left:0;right:auto;bottom:auto;width:clamp(140px,46vw,210px);max-width:72%;transform:scaleX(-1)}
+  .timeline-panel>.timeline-flower{top:-6px;right:-6px;width:clamp(120px,38vw,180px);max-width:64%}
+  .wedding-info>.wedding-botanical-frame3{bottom:0;width:min(76%,280px)}
+  .guestbook-art{top:18px;left:45%;width:min(128%,560px);max-width:none;transform:translateX(-50%)}
+  .guestbook-content{padding-top:122px;padding-bottom:40px}
+}
+
+/* Olive and white wedding palette. */
+:root{--wine:#46553a;--wine-deep:#34412b;--cream:#fff;--paper:#f7f8f4;--muted:rgba(247,248,244,.76);--gold:#aab58a}
+body{background:#fff;color:var(--wine)}
+.invitation-shell{background:#fff;color:var(--wine)}
+.cover-kicker,.cover.is-opening .cover-kicker-after,.cover.is-open .cover-kicker-after{color:#46553a}
+.burgundy-panel,.wedding-countdown{background:#46553a;color:#f7f8f4}
+.dress-colors span:nth-child(2){background:#71815c}
+.dress-colors span:nth-child(3){background:#aab58a}
+.dress-colors span:nth-child(4){border-color:#46553a30;background:#fff}
+.album-dialog{background:#fff;color:var(--wine)}
+.album-dialog::backdrop{background:#182015d9}
+.album-dialog-close,.album-dialog-arrow{background:#fff;color:var(--wine)}
+.music-toggle.is-playing{background:#46553a;color:#fff;border-color:#71815c}
+.heart-burst span{color:#aab58a;text-shadow:0 1px 5px #34412b}
+.wish-suggestion:hover,.wish-suggestion:focus-visible{background:#46553a12}
+
+.cover.is-opening .envelope-bg,.cover.is-open .envelope-bg{transform:translate(-1px,calc(9% + 1px)) scale(1.12);transform-origin:center}
+
+/* Wedding panel decor alignment. */
+.wedding-info>.invitation-panel>.panel-flower-left{
+  z-index:3;
+  top:-5%;
+  left:-20%;
+  width:clamp(150px,40vw,285px);
+  max-width:70%;
+  transform:rotate(-8deg);
+}
+.wedding-info>.invitation-panel{overflow:visible}
+.wedding-info>.wedding-botanical-frame3{
+  bottom:-8%;
+  left:50%;
+  right:auto;
+  margin-left:0;
+  width:min(64%,400px);
+  object-position:center;
+  transform-origin:50% 50%;
+  transform:translateX(-50%) scaleX(-1);
+}
+.wedding-info>.invitation-panel>*:not(.panel-flower){
+  position:relative;
+  z-index:4;
+}
+.reception-panel>.panel-flower-reception{
+  background:transparent;
+  mix-blend-mode:normal;
+  object-fit:contain;
+  box-shadow:none;
+}
+@media(max-width:650px){
+  .wedding-info>.invitation-panel>.panel-flower-left{
+    z-index:3;
+    top:-5%;
+    left:-20%;
+    width:clamp(125px,40vw,180px);
+    max-width:66%;
+  }
+  .wedding-info>.wedding-botanical-frame3{
+    bottom:-5%;
+    left:50%;
+    right:auto;
+    margin-left:0;
+    width:min(58%,200px);
+    object-position:center;
+    transform-origin:50% 50%;
+    transform:translateX(-50%) scaleX(-1);
+  }
+}
+
+/* Guestbook paper and floral decor are separate layers for easier alignment. */
+.guestbook-section{overflow:hidden}
+.guestbook-paper{
+  z-index:0;
+  top:13%;
+  left:50%;
+  width:min(118%,680px);
+  max-width:none;
+  transform:translateX(-50%);
+  object-fit:contain;
+  opacity:1;
+}
+.guestbook-flower{
+  z-index:1;
+  top:auto;
+  bottom:0;
+  left:6%;
+  width:min(48%,360px);
+  max-width:none;
+  transform:none;
+  object-fit:contain;
+  opacity:1;
+}
+.guestbook-content{z-index:2;padding-top:clamp(118px,10vw,138px);padding-bottom:52px}
+@media(max-width:650px){
+  .guestbook-paper{top:13%;left:50%;width:min(122%,520px);transform:translateX(-50%)}
+  .guestbook-flower{top:auto;bottom:0;left:6%;width:min(56%,230px)}
+  .guestbook-content{padding-top:112px;padding-bottom:42px}
+}
+@media(min-width:651px){
+  .reception-panel>.panel-flower-reception{
+    position:absolute;
+    z-index:3;
+    display:block;
+    top:0;
+    left:0;
+    right:auto;
+    bottom:auto;
+    width:240px;
+    max-width:62%;
+    height:auto;
+    opacity:1;
+    visibility:visible;
+    transform:scaleX(-1);
+  }
+}
+
+/* Restore the original decor placement before manual position adjustments. */
+.invitation-panel,.reception-panel,.timeline-panel{overflow:hidden}
+.invitation-panel>.panel-flower-left{
+  z-index:0;
+  top:-5%;
+  left:-4%;
+  right:auto;
+  bottom:auto;
+  width:120%;
+  max-width:500px;
+  height:auto;
+  opacity:1;
+  transform:none;
+}
+.reception-panel>.panel-flower-reception{
+  z-index:1;
+  top:auto;
+  right:-6%;
+  bottom:-5%;
+  left:auto;
+  width:clamp(170px,38vw,340px);
+  max-width:none;
+  height:auto;
+  opacity:.9;
+  transform:none;
+  visibility:visible;
+}
+.timeline-panel>.timeline-flower{
+  top:-9%;
+  right:-7%;
+  bottom:auto;
+  left:auto;
+  width:clamp(286px,84.5vw,416px);
+  max-width:none;
+  height:auto;
+  opacity:.62;
+  transform:none;
+}
+.wedding-info>.wedding-botanical-frame3{
+  bottom:-8%;
+  left:48%;
+  width:min(100%,900px);
+  max-width:none;
+  transform:translateX(-50%);
+}
+.wedding-info>.invitation-panel>*:not(.panel-flower){z-index:2}
+@media(max-width:650px){
+  .invitation-panel>.panel-flower-left{top:-5%;left:-4%;width:100%;max-width:420px;height:auto;opacity:.9;transform:none}
+  .reception-panel>.panel-flower-reception{top:auto;right:-6%;bottom:-3%;left:auto;width:clamp(155px,44vw,210px);max-width:none;transform:none}
+  .timeline-panel>.timeline-flower{top:-9%;right:-7%;width:clamp(286px,84.5vw,416px);max-width:none;transform:none}
+  .wedding-info>.wedding-botanical-frame3{bottom:0;left:50%;width:min(80%,300px);transform:translateX(-50%)}
+}
+@media(min-width:768px){
+  .reception-panel>.panel-flower-reception{width:min(340px,38vw)}
+}
+
+/* Move reception decor to the upper-left corner. */
+.reception-panel>.panel-flower-reception{
+  z-index:1;
+  top:-10%;
+  left:auto;
+  right:-9%;
+  bottom:auto;
+  width:clamp(170px,38vw,280px);
+  max-width:72%;
+  height:auto;
+  opacity:1;
+  transform:none;
+}
+.reception-panel{overflow:visible}
+.wedding-info>.wedding-botanical-frame3{
+  bottom:-7%;
+  left:50%;
+  width:min(49%,430px);
+  transform:translateX(-50%);
+}
+.timeline-panel>.timeline-flower{
+  z-index:0;
+  top:50%;
+  left:50%;
+  right:auto;
+  bottom:auto;
+  width:min(72%,360px);
+  max-width:100%;
+  opacity:.28;
+  transform:translate(-50%,-50%);
+  transform-origin:center;
+}
+ .timeline-panel>*:not(.timeline-flower):not(.timeline-paper){position:relative;z-index:2}
+@media(max-width:650px){
+  .reception-panel>.panel-flower-reception{
+    z-index:5;
+    top:-17%;
+    left:auto;
+    right:-9%;
+    bottom:auto;
+    width:clamp(135px,42vw,200px);
+    max-width:70%;
+    transform:scaleX(-1);
+    transform-origin:top right;
+  }
+  .wedding-info>.wedding-botanical-frame3{
+    bottom:1%;
+    left:50%;
+    width:min(43%,165px);
+    transform:translateX(-50%);
+  }
+  .timeline-panel>.timeline-flower{
+    top:50%;
+    left:50%;
+    width:min(78%,250px);
+    transform:translate(-50%,-50%);
+  }
+}
+
+/* Reference floral decor: use the muted white-calla botanical assets only after the cover opens. */
+.wedding-info>.wedding-botanical-frame3{
+  z-index:1;
+  bottom:-7%;
+  left:50%;
+  width:min(92%,620px);
+  max-width:none;
+  opacity:.9;
+  transform:translateX(-50%);
+  filter:saturate(.78) contrast(.98) brightness(1.04) drop-shadow(0 2px 4px rgba(42,54,32,.22));
+}
+.wedding-info>.invitation-panel>.panel-flower-left{
+  z-index:1;
+  top:-7%;
+  left:-7%;
+  width:clamp(175px,42vw,300px);
+  max-width:78%;
+  height:auto;
+  opacity:.96;
+  transform:none;
+  filter:saturate(.78) contrast(.98) brightness(1.04) drop-shadow(0 2px 4px rgba(42,54,32,.22));
+}
+.reception-panel>.panel-flower-reception{
+  z-index:1;
+  top:-7%;
+  right:-8%;
+  bottom:auto;
+  left:auto;
+  width:clamp(170px,42vw,300px);
+  max-width:78%;
+  height:auto;
+  opacity:.94;
+  transform:scaleX(-1);
+  transform-origin:top right;
+  filter:saturate(.78) contrast(.98) brightness(1.04) drop-shadow(0 2px 4px rgba(42,54,32,.22));
+}
+.timeline-panel>.timeline-flower{
+  z-index:1;
+  top:auto;
+  right:-8%;
+  bottom:-9%;
+  left:auto;
+  width:clamp(190px,46vw,330px);
+  max-width:78%;
+  height:auto;
+  opacity:.5;
+  transform:none;
+  filter:saturate(.72) contrast(.98) brightness(1.06) drop-shadow(0 2px 4px rgba(42,54,32,.18));
+}
+.guestbook-flower{
+  z-index:1;
+  top:auto;
+  right:auto;
+  bottom:-2%;
+  left:-5%;
+  width:clamp(180px,48vw,300px);
+  max-width:72%;
+  opacity:.9;
+  transform:scaleX(-1);
+  filter:saturate(.78) contrast(.98) brightness(1.04) drop-shadow(0 2px 4px rgba(42,54,32,.2));
+}
+@media(max-width:650px){
+  .wedding-info>.wedding-botanical-frame3{bottom:-2%;width:min(88%,320px)}
+  .wedding-info>.invitation-panel>.panel-flower-left{top:-5%;left:-10%;width:clamp(145px,46vw,220px);max-width:72%}
+  .reception-panel>.panel-flower-reception{top:-10%;right:-10%;width:clamp(145px,46vw,220px);max-width:72%}
+  .timeline-panel>.timeline-flower{right:-10%;bottom:-5%;width:clamp(155px,44vw,220px);max-width:70%;opacity:.42}
+  .guestbook-flower{bottom:-1%;left:-8%;width:clamp(145px,48vw,220px);max-width:70%}
+}
+
+/* Final countdown background image override. */
+.wedding-countdown{
+  background-color:#46553a;
+  background-image:linear-gradient(rgba(48,64,24,.62),rgba(48,64,24,.62)),url("assets/theme/Elegant Calla Lily Corner Frame.png");
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-blend-mode:multiply;
+}
+
+/* Botanical reference arrangement. Scoped to the opened invitation only;
+   these absolute overlays do not change card dimensions or the closed cover. */
+#site .floral-decor,
+#site .panel-flower,
+#site .timeline-flower,
+#site .guestbook-flower{
+  position:absolute;display:block;object-fit:contain;height:auto;
+  pointer-events:none;user-select:none;animation:none;
+  filter:saturate(.66) contrast(.94) brightness(1.04) drop-shadow(0 2px 2px #34412b18);
+  opacity:1;max-width:none;
+}
+#site .invitation-panel>.panel-flower-left{
+  z-index:35;top:-80px;left:-70px;right:auto;bottom:auto;
+  width:clamp(115px,26vw,175px);height:auto;transform:scaleY(-1);transform-origin:center;
+}
+#site .invitation-panel>.ceremony-floral-bottom{
+  z-index:1;top:auto;left:auto;right:-24px;bottom:-24px;
+  width:clamp(135px,30vw,205px);transform:scaleX(-1);
+}
+#site .wedding-countdown{background-image:none}
+#site .countdown-floral{
+  z-index:1;left:-25px;bottom:-28px;width:clamp(100px,24vw,155px);transform:none;
+}
+#site .album-floral-left,#site .album-floral-right{
+  z-index:2;bottom:15px;width:clamp(115px,28vw,215px);
+}
+#site .album-floral-left{left:1%;transform:none}
+#site .album-floral-right{right:1%;transform:scaleX(-1)}
+#site .reception-panel>.panel-flower-reception{
+  z-index:1;top:auto;right:auto;bottom:-24px;left:-28px;
+  width:clamp(145px,33vw,230px);height:auto;transform:none;transform-origin:center;
+}
+#site .timeline-panel>.timeline-flower{
+  z-index:1;top:auto;left:auto;right:-22px;bottom:-20px;
+  width:clamp(130px,30vw,205px);height:auto;transform:scaleX(-1);transform-origin:center;
+}
+#site .guestbook-flower{
+  z-index:1;top:auto;right:0;bottom:28px;left:auto;
+  width:clamp(100px,23vw,170px);height:auto;transform:scaleX(-1);
+}
+#site .gift-floral{
+  z-index:1;bottom:30px;right:calc(50% - 155px);
+  width:clamp(100px,25vw,155px);transform:scaleX(-1);
+}
+@media(max-width:650px){
+  #site .invitation-panel>.panel-flower-left{top:-16px;left:-18px;width:112px}
+  #site .invitation-panel>.ceremony-floral-bottom{right:-18px;bottom:-18px;width:135px}
+  #site .countdown-floral{left:-12px;bottom:-18px;width:95px}
+  #site .album-floral-left,#site .album-floral-right{bottom:22px;width:112px}
+  #site .reception-panel>.panel-flower-reception{left:-18px;bottom:-20px;width:140px}
+  #site .timeline-panel>.timeline-flower{right:-15px;bottom:-16px;width:130px}
+  #site .guestbook-flower{right:-9px;bottom:24px;width:100px}
+  #site .gift-floral{right:calc(50% - 130px);bottom:40px;width:110px}
+}
+
+/* Olive and soft white only inside the opened invitation. */
+#site{
+  --wine:#4f5b43;--wine-deep:#394432;--cream:#fffefa;
+  --paper:#fffefa;--muted:rgba(255,254,250,.82);--gold:#b9b497;
+  background:#fffefa;color:#4f5b43;
+}
+#site .burgundy-panel,#site .wedding-countdown{
+  background-color:#4f5b43;color:#fffefa;
+  border-color:#b9b49780;box-shadow:0 8px 24px #39443216;
+}
+#site .section-title,#site .guestbook-content,#site .footer{color:#4f5b43}
+#site .wish-form input,#site .wish-form textarea{
+  color:#4f5b43;background:#fffefae8;border-color:#87917880;
+}
+#site .wish-form input::placeholder,#site .wish-form textarea::placeholder{color:#75806b}
+#site .wish-submit,#site .gift-teaser button{background-color:#4f5b43;color:#fffefa}
+#site .magic-button{background:#4f5b4310;color:#4f5b43}
+#site .wish-list article,#site .wish-suggestion{background:#fffefa;color:#4f5b43;border-color:#87917855}
+#site .wish-list time{color:#75806b}
+#site .rsvp-link{background:#fffefa;color:#4f5b43}
+#site .countdown-unit{background:#fffefa0d;border-color:#fffefa30}
+
+/* Reference countdown bouquet: outside the lower-left edge, clear of the digits. */
+#site .wedding-countdown>.countdown-scatter{
+  z-index:1;top:auto;right:auto;left:-24px;bottom:-35px;
+  width:calc(100% + 24px);max-width:none;height:calc(100% + 24px);
+  object-fit:fill;transform:none;
+  opacity:.88;
+  filter:saturate(.72) brightness(1.03) drop-shadow(1px 2px 2px rgba(70,66,43,.12));
+  pointer-events:none;
+}
+@media(max-width:650px){
+  #site .wedding-countdown>.countdown-scatter{
+    left:-16px;bottom:-27px;width:calc(100% + 18px);height:calc(100% + 20px);
+  }
+}
+#site .floral-decor,#site .panel-flower,#site .timeline-flower,#site .guestbook-flower{
+  filter:saturate(.88) drop-shadow(0 2px 3px #39443212);
+}
+
+/* Separate bouquet from the original floating leaves/petals. */
+#site .wedding-countdown>.countdown-scatter{
+  clip-path:polygon(0 0,100% 0,100% 100%,65% 100%,65% 24%,0 24%);
+}
+#site .wedding-countdown>.countdown-floral{
+  position:absolute;z-index:1;top:auto;right:auto;left:-32px;bottom:-37px;
+  width:clamp(175px,44vw,245px);height:auto;max-width:none;
+  opacity:.96;
+  filter:saturate(.74) contrast(.96) brightness(1.04) drop-shadow(1px 3px 3px rgba(70,66,43,.14));
+  object-fit:contain;transform:none;pointer-events:none;
+}
+@media(max-width:650px){
+  #site .wedding-countdown>.countdown-floral{
+    left:-22px;bottom:-29px;width:clamp(135px,43vw,175px);height:auto;
+  }
+}
+
+/* Individually positioned source cutouts: preserve the original leaf/petal proportions. */
+#site .wedding-countdown>.countdown-petal,
+#site .wedding-countdown>.countdown-leaf,
+#site .wedding-countdown>.countdown-sprig{
+  position:absolute;height:auto;max-width:none;pointer-events:none;
+  object-fit:contain;filter:saturate(.72) brightness(1.03) drop-shadow(1px 2px 2px #554e3320);
+}
+#site .wedding-countdown>.countdown-petal{z-index:1;width:36px;opacity:.9}
+#site .wedding-countdown>.countdown-petal-left{left:4%;top:20%;bottom:auto;transform:rotate(-65deg)}
+#site .wedding-countdown>.countdown-petal-right{right:4%;top:23%;left:auto;bottom:auto;width:29px;transform:rotate(75deg);opacity:.82}
+#site .wedding-countdown>.countdown-petal-bottom{left:51%;top:auto;bottom:-19px;width:42px;transform:rotate(83deg);opacity:.94}
+#site .wedding-countdown>.countdown-leaf{z-index:1;left:auto;right:10%;top:auto;bottom:-42px;width:27px;transform:rotate(-24deg);opacity:.88}
+#site .wedding-countdown>.countdown-sprig{z-index:0;left:-28px;right:auto;top:auto;bottom:0;width:38px;transform:rotate(-16deg);opacity:.85}
+@media(max-width:650px){
+  #site .wedding-countdown>.countdown-petal-left{left:3%;top:22%;width:26px}
+  #site .wedding-countdown>.countdown-petal-right{right:3%;top:22%;width:22px}
+  #site .wedding-countdown>.countdown-petal-bottom{bottom:-16px;width:31px}
+  #site .wedding-countdown>.countdown-leaf{right:10%;bottom:-32px;width:21px}
+  #site .wedding-countdown>.countdown-sprig{left:-17px;width:28px;bottom:0}
+}
+
+/* Double the upper-left flower in the ceremony panel. */
+#site .invitation-panel>.panel-flower-left{width:clamp(207px,46.8vw,315px)}
+@media(max-width:650px){#site .invitation-panel>.panel-flower-left{width:201.6px}}
+/* Shift the upper-left ceremony flower 3% farther left. */
+#site .invitation-panel>.panel-flower-left{left:calc(-68px - 3%)}
+@media(max-width:650px){#site .invitation-panel>.panel-flower-left{left:calc(-16px - 3%)}}
+/* Keep the countdown bouquet upright at the right edge, clear and behind text. */
+#site .wedding-countdown>.countdown-floral{
+  z-index:0;top:0;right:calc(-22px - 7%);bottom:0;left:auto;width:clamp(118px,27vw,165px);height:100%;
+  opacity:1;object-fit:contain;object-position:right center;
+  transform:none;filter:drop-shadow(0 2px 3px rgba(41,16,18,.18));
+}
+#site .wedding-countdown>h2,
+#site .wedding-countdown>.countdown-date,
+#site .wedding-countdown>.countdown-grid,
+#site .wedding-countdown>.countdown-status{position:relative;z-index:1}
+@media(max-width:650px){#site .wedding-countdown>.countdown-floral{right:calc(-14px - 7%);width:118px}}
+/* Bring out the small leaf sprig on the countdown's left edge. */
+#site .wedding-countdown>.countdown-sprig{
+  opacity:1;filter:saturate(1.08) contrast(1.12) brightness(1.08) drop-shadow(0 2px 3px rgba(41,16,18,.24));
+}
+/* Shift the lower-left reception flower farther toward the panel edge. */
+#site .reception-panel>.panel-flower-reception{z-index:5;left:calc(-28px - 12%);right:auto;bottom:calc(-24px + 2%)}
+@media(max-width:650px){#site .reception-panel>.panel-flower-reception{left:calc(-18px - 12%);bottom:calc(-20px + 2%)}}
+/* Center and soften the right-side flower in the reception details panel. */
+:root{
+  --reception-leaf-top:45%;--reception-leaf-left:50%;
+  --reception-leaf-height:70%;--reception-leaf-scale:1.0815;
+  --reception-leaf-opacity:.32;--reception-leaf-inset:40px;
+}
+#site .reception-panel>.panel-flower-reception-right{
+  z-index:1;top:var(--reception-leaf-top);right:auto;bottom:auto;left:var(--reception-leaf-left);
+  width:calc(100% - var(--reception-leaf-inset));max-width:calc(100% - var(--reception-leaf-inset));
+  height:var(--reception-leaf-height);max-height:calc(100% - var(--reception-leaf-inset));
+  object-fit:contain;opacity:var(--reception-leaf-opacity);
+  transform:translate(-50%,-50%) rotate(-2deg) scale(var(--reception-leaf-scale));transform-origin:center;
+}
+@media(max-width:650px){
+  #site .reception-panel{--reception-leaf-inset:clamp(20px,7.15vw,40px)}
+}
+/* Move the wedding timeline flower up 15% and right 5%. */
+#site .timeline-panel>.timeline-flower{right:calc(-22px - 5%);bottom:calc(-20px + 25%)}
+@media(max-width:650px){#site .timeline-panel>.timeline-flower{right:calc(-15px - 5%);bottom:calc(-16px + 25%)}}
+/* Anchor the guestbook bouquet at the lower-left of its frame. */
+#site .guestbook-flower{display:block;top:auto;right:auto;bottom:36.3%;left:5%;width:clamp(150px,34.5vw,205px);transform:scaleX(-1)}
+@media(max-width:650px){#site .guestbook-flower{display:block;right:auto;bottom:5%;left:6%;width:150px;transform:scaleX(-1)}}
+/* Give the isolated gift envelope a taller, more balanced shape. */
+#site .gift-envelopes{height:320px}
+#site .gift-envelopes img{height:310px}
+#site .gift-envelopes .gift-front{width:200px;height:310px}
+@media(max-width:767px){#site .gift-envelopes{height:295px}#site .gift-envelopes img{height:285px}#site .gift-envelopes .gift-front{width:184px;height:285px}}
+/* Slightly narrow the reception map while keeping it centered. */
+#site .reception-panel .map-frame{width:95%;max-width:95%;margin-inline:auto}
+
+/* Right-side ceremony decor: one-third size, aligned to the card edge. */
+#site .invitation-panel>.ceremony-floral-right{
+  z-index:1;top:30%;right:-26%;left:auto;width:305px;height:auto;opacity:1;
+  transform:translateY(-50%) rotate(90deg);transform-origin:center;
+}
+#site .invitation-panel>.ceremony-floral-bottom{opacity:.35}
+
+/* Remove the cream paper base behind the invitation content. */
+.invitation-shell{background:#fff}
+#site{background:transparent}
+.paper-grain:before{opacity:0}
+#site .album-section:before,#site .gift-section:before{display:none!important}
+
+/* Open-cover flower size and placement. */
+.cover.is-open .envelope-flower{z-index:29;width:75%;left:calc(-30% - 30px);top:-1%;transform:rotate(15deg)}
+@keyframes openingFlowerPulse{0%,100%{transform:rotate(19deg) scale(1)}50%{transform:rotate(20deg) scale(1.015)}}
+
+@font-face{font-family:"Embassy BT";src:url("assets/fonts/Embassy BT.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"Dancing Script";src:url("assets/fonts/DancingScript-Variable.ttf") format("truetype-variations");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Generale Script";src:url("assets/fonts/GeneraleScript.ttf") format("truetype");font-weight:400;font-display:swap}
+
+
+
+
+
+
+
+/* Keep the heart divider compact within the couple-name frame. */
+#site .invitation-panel .couple-names>.couple-hearts{display:block;width:70px;height:46px;flex:none;object-fit:contain}
+
+
+@font-face{font-family:'SVN Manchester Park';src:url('assets/fonts/SVN-Manchester%20Park.otf') format('opentype');font-weight:400;font-display:swap}
+#site .invitation-panel .couple-names h3{font-family:'SVN Manchester Park','The Nautigal',cursive;width:100%;min-width:0;min-height:0;height:auto;max-width:100%;font-size:clamp(24px,6vw,32px);font-weight:400;line-height:1.6;white-space:normal;overflow-wrap:normal;text-wrap:balance}
+
+
+/* Emphasize the closing message. */
+#site .wish-submit{
+  box-shadow:0 0 0 1px #d8dba5,0 0 12px #b9c58b80;
+  animation:wishButtonGlow 2.4s ease-in-out infinite;
+}
+@keyframes wishButtonGlow{
+  0%,100%{box-shadow:0 0 0 1px #d8dba5,0 0 10px #b9c58b66}
+  50%{box-shadow:0 0 0 2px #e9e8bd,0 0 18px #b9c58bb3,0 0 28px #b9c58b59}
+}
+#site .wish-submit:focus-visible{outline:2px solid #4f5b43;outline-offset:5px}
+@media(prefers-reduced-motion:reduce){#site .wish-submit{animation:none}}
+
+#site .footer p{font-size:32px;font-weight:800;line-height:1.5}
+
+/* Botanical background behind the closing message. */
+#site .footer{isolation:isolate;min-height:240px;display:grid;place-items:center;padding:40px 18px;transform:translateY(10%);margin-bottom:48px}
+#site .footer::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("assets/theme/Elegant Botanical Wedding Clipart Collection new 6.png") center/contain no-repeat;
+  transform:translateY(10%);
+  opacity:.46;
+}
+
+/* Ceremony content determines the panel height and pushes later sections down. */
+#site #details{display:flow-root;height:auto;min-height:0;padding-bottom:48px}
+#site #details>.invitation-panel{
+  display:flex;flex-direction:column;align-items:center;
+  height:auto;min-height:0;max-height:none;
+  gap:24px;padding:36px clamp(16px,4vw,28px) 44px;
+}
+#site #details .invitation-panel>:is(.panel-title,.announce,.couple-names,.ceremony-info,.family-grid){
+  position:relative;inset:auto;transform:none;
+  width:100%;min-width:0;max-width:100%;margin:0;flex-shrink:0;
+}
+#site #details .panel-title{
+  font-weight:700;line-height:1.3;
+  letter-spacing:.03em;text-wrap:balance;
+}
+#site #details .announce{
+  font-weight:400;line-height:1.65;
+  letter-spacing:0;white-space:normal;
+}
+#site #details .couple-names{gap:8px;padding:4px 0}
+#site #details .couple-names h3{
+  display:block;height:auto;min-height:0;max-width:100%;
+  margin:0;padding:6px 0;line-height:1.6;
+  letter-spacing:.065em;word-spacing:.18em;
+}
+#site #details .ceremony-info{gap:14px}
+#site #details .ceremony-info>p{
+  width:100%;margin:0;font-weight:400;
+  line-height:1.6;letter-spacing:.01em;white-space:normal;
+}
+#site #details .ceremony-time{
+  width:100%;flex-wrap:wrap;gap:6px 18px;
+  line-height:1.5;letter-spacing:.02em;white-space:normal;
+}
+#site #details .ceremony-date{gap:14px}
+#site #details .ceremony-date>strong{line-height:1.1}
+#site #details .date-month b:first-child{line-height:1.4}
+#site #details .date-month b:last-child{line-height:1.3}
+#site #details .ceremony-info>small{margin:0;line-height:1.6;letter-spacing:0}
+#site #details .family-grid{
+  grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);
+  column-gap:12px;align-items:start;
+}
+#site #details .family-grid article{row-gap:6px;align-content:start}
+#site #details .family-grid article>span{line-height:1.5}
+#site #details .family-grid article>strong{
+  font-weight:500;line-height:1.6;
+  overflow-wrap:normal;word-break:normal;
+}
+#site #details .family-grid article>p:empty{display:none}
+#site #details .family-divider{height:100%;min-height:72px}
+@media(max-width:360px){
+  #site #details .family-grid{grid-template-columns:minmax(0,1fr);row-gap:18px}
+  #site #details .family-divider{display:none}
+}
+
+/* Increase every ceremony text size by exactly 2px at each breakpoint. */
+#site #details .panel-title{font-size:calc(clamp(24px,3.8vw,30px) + 2px)}
+#site #details .announce{font-size:calc(clamp(17px,2.4vw,20px) + 2px)}
+#site #details .couple-names h3{font-size:calc(clamp(24px,6vw,32px) + 2px)}
+#site #details .ceremony-info>p{font-size:calc(clamp(19px,2.7vw,23px) + 2px)}
+#site #details .ceremony-time{font-size:calc(clamp(15px,2vw,17px) + 2px)}
+#site #details .ceremony-date>strong{font-size:calc(clamp(54px,7vw,64px) + 2px)}
+#site #details .date-month b:first-child{font-size:calc(clamp(15px,1.9vw,17px) + 2px)}
+#site #details .date-month b:last-child{font-size:calc(clamp(21px,2.7vw,24px) + 2px)}
+#site #details .ceremony-info>small{font-size:calc(clamp(14px,1.8vw,16px) + 2px)}
+#site #details .family-grid article>span{font-size:calc(clamp(15px,1.9vw,17px) + 2px)}
+#site #details .family-grid article>strong{font-size:calc(clamp(17px,2.2vw,20px) + 2px)}
+#site #details .family-grid article>p{font-size:calc(clamp(15px,1.9vw,17px) + 2px)}
+@media(max-width:650px){
+  #site #details .panel-title{font-size:calc(clamp(19px,5.2vw,22px) + 2px)}
+  #site #details .announce{font-size:16px}
+  #site #details .ceremony-info>p{font-size:17px}
+  #site #details .ceremony-time{font-size:15px}
+  #site #details .ceremony-date>strong{font-size:42px}
+  #site #details .date-month b:first-child{font-size:15px}
+  #site #details .date-month b:last-child{font-size:20px}
+  #site #details .ceremony-info>small{font-size:14px}
+  #site #details .family-grid article>span{font-size:15px}
+  #site #details .family-grid article>strong{font-size:calc(clamp(13px,3.5vw,15px) + 2px)}
+  #site #details .family-grid article>p{font-size:13px}
+}
+/* Give the larger countdown text enough room inside its frame. */
+#site .wedding-countdown{width:min(96%,600px);height:auto;max-height:none;padding:26px 18px 28px}
+#site .wedding-countdown h2{font-size:calc(clamp(16px,2.3vw,18px) + 2px);line-height:1.45;text-wrap:balance}
+#site .countdown-date{font-size:15px;line-height:1.5;margin-top:8px}
+#site .countdown-grid{gap:clamp(6px,1.5vw,12px);margin-top:20px}
+#site .countdown-unit{min-height:88px;height:auto;gap:6px;padding:12px 4px}
+#site .countdown-unit strong{font-size:calc(clamp(25px,5.5vw,38px) + 2px);line-height:1.15}
+#site .countdown-unit span{font-size:13px;line-height:1.4}
+#site .countdown-status{font-size:18px;line-height:1.5}
+@media(max-width:650px){
+  #site .wedding-countdown{padding:22px 12px 24px}
+  #site .wedding-countdown h2{font-size:calc(clamp(14px,3.6vw,17px) + 2px)}
+  #site .countdown-unit strong{font-size:calc(clamp(24px,6vw,30px) + 2px)}
+  #site .countdown-unit span{font-size:14px}
+}
+@media(max-width:350px){#site .countdown-unit strong{font-size:26px}}
+/* Reception text: 3px larger, with a slightly raised heading. */
+#site .reception-panel{height:auto;max-height:none}
+#site .reception-panel>.panel-title{font-size:calc(clamp(24px,3.8vw,30px) + 3px);transform:translateY(-6px);line-height:1.3;text-wrap:balance}
+#site .reception-panel h3{font-size:calc(clamp(19px,2.7vw,23px) + 3px)}
+#site .reception-panel .reception-time{font-size:calc(clamp(15px,2vw,17px) + 3px);flex-wrap:wrap;max-width:100%}
+#site .reception-panel .reception-date>strong{font-size:calc(clamp(52px,7vw,62px) + 3px)}
+#site .reception-panel .date-month b:first-child{font-size:calc(clamp(15px,1.9vw,17px) + 3px)}
+#site .reception-panel .date-month b:last-child{font-size:calc(clamp(21px,2.7vw,24px) + 3px)}
+#site .reception-panel .lunar-date{font-size:calc(clamp(14px,1.8vw,16px) + 3px)}
+#site .reception-panel .schedule-pills span{font-size:calc(clamp(14px,1.8vw,16px) + 3px)}
+#site .reception-panel .schedule-pills strong{font-size:calc(clamp(21px,2.7vw,24px) + 3px)}
+#site .reception-panel .venue-details{container-type:inline-size}
+#site .reception-panel .venue-address{width:100%;max-width:none;font-size:clamp(11px,4cqi,20px);line-height:1.6;text-align:center}
+#site .reception-panel .venue-address>span{display:block;white-space:nowrap}
+#site .reception-panel .directions-link{font-size:17px}
+#site .reception-panel .rsvp-link{font-size:18px;max-width:100%;white-space:normal}
+@media(max-width:650px){
+  #site .reception-panel>.panel-title{font-size:calc(clamp(19px,5.2vw,22px) + 3px)}
+  #site .reception-panel h3{font-size:19px}
+  #site .reception-panel .reception-time{font-size:16px}
+  #site .reception-panel .reception-date>strong{font-size:43px}
+  #site .reception-panel .date-month b:first-child{font-size:16px}
+  #site .reception-panel .date-month b:last-child{font-size:21px}
+  #site .reception-panel .lunar-date{font-size:15px}
+  #site .reception-panel .schedule-pills span{font-size:15px}
+  #site .reception-panel .schedule-pills strong{font-size:21px}
+}
+
+/* Bold field text while preserving the original field and font sizes. */
+#site .wish-form input,
+#site .wish-form textarea,
+#site .wish-form input::placeholder,
+#site .wish-form textarea::placeholder{font-weight:800}
+#site .wish-list strong{font-weight:800}
+#site .wish-list p{font-weight:700}
+
+/* Larger bold album and gift section titles. */
+#site .album-section>.section-title,
+#site .gift-section>.section-title{font-size:clamp(28px,7vw,34px);font-weight:700;line-height:1.3}
+
+/* Small botanical accents at the edges of each content section. */
+#site .content-accent{
+  position:absolute;inset:auto;z-index:0;display:block;
+  width:clamp(28px,6vw,48px);height:auto;max-width:none;
+  object-fit:contain;opacity:.48;pointer-events:none;user-select:none;
+  filter:saturate(.75);animation:none;transform:rotate(var(--accent-angle,0deg));
+}
+#site .invitation-panel>.content-accent.accent-a{top:12px;right:10px;width:42px;--accent-angle:-25deg;opacity:.42}
+#site .invitation-panel>.content-accent.accent-b{bottom:12px;left:10px;width:30px;--accent-angle:24deg;opacity:.38}
+#site .wedding-countdown>.content-accent.accent-a{top:-8px;left:0;width:44px;--accent-angle:20deg;opacity:.45}
+#site .wedding-countdown>.content-accent.accent-b{bottom:8px;right:6px;width:25px;--accent-angle:-30deg;opacity:.38}
+#site .album-section>.content-accent.accent-a{top:18px;right:3%;width:38px;--accent-angle:25deg}
+#site .album-section>.content-accent.accent-b{bottom:6px;left:5%;width:42px;--accent-angle:-18deg;opacity:.4}
+#site .reception-panel>.content-accent.accent-a{top:12px;right:6px;width:24px;--accent-angle:22deg;opacity:.4}
+#site .reception-panel>.content-accent.accent-b{bottom:12px;right:10px;width:32px;--accent-angle:-26deg;opacity:.35}
+#site .timeline-panel>.content-accent.accent-a{top:18px;left:5px;width:30px;--accent-angle:-18deg;opacity:.4}
+#site .timeline-panel>.content-accent.accent-b{bottom:10px;left:12px;width:32px;--accent-angle:25deg;opacity:.4}
+#site .guestbook-section>.content-accent.accent-a{top:36px;right:3%;width:44px;--accent-angle:22deg;opacity:.42}
+#site .guestbook-section>.content-accent.accent-b{bottom:16px;right:4%;width:34px;--accent-angle:-15deg;opacity:.42}
+#site .gift-section>.content-accent.accent-a{top:25px;left:4%;width:48px;--accent-angle:30deg;opacity:.45}
+#site .gift-section>.content-accent.accent-b{bottom:18px;right:5%;width:38px;--accent-angle:-25deg;opacity:.42}
+#site .footer>.content-accent.accent-a{bottom:18px;left:4%;width:25px;--accent-angle:-32deg;opacity:.4}
+#site .footer>.content-accent.accent-b{top:14px;right:4%;width:36px;--accent-angle:18deg;opacity:.4}
+#site .footer>p{position:relative;z-index:1}
+@media(max-width:650px){
+  #site .content-accent{max-width:11%}
+  #site .reception-panel>.content-accent.accent-a{max-width:8%}
+}
+/* Slow falling leaves, confined to each content section. */
+.invitation-shell .botanical-drift{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+  border-radius:inherit;pointer-events:none;user-select:none;
+}
+.invitation-shell .drifting-leaf{
+  position:absolute;top:-48px;left:var(--leaf-left);width:var(--leaf-size);
+  display:block;opacity:0;pointer-events:none;
+  animation:botanicalLeafFall var(--leaf-duration) linear var(--leaf-delay) infinite;
+  animation-play-state:paused;
+}
+.invitation-shell .drifting-leaf img{
+  display:block;width:100%;height:auto;filter:saturate(.7);
+  animation:botanicalLeafSway 4.5s ease-in-out var(--leaf-delay) infinite alternate;
+  animation-play-state:paused;
+}
+.invitation-shell .leaves-in-view>.botanical-drift .drifting-leaf,
+.invitation-shell .leaves-in-view>.botanical-drift .drifting-leaf img{animation-play-state:running}
+@keyframes botanicalLeafFall{
+  0%{opacity:0;transform:translate3d(0,0,0)}
+  12%{opacity:.7}
+  82%{opacity:.6}
+  100%{opacity:0;transform:translate3d(var(--leaf-drift),var(--leaf-travel,600px),0)}
+}
+@keyframes botanicalLeafSway{
+  from{transform:translateX(-9px) rotate(var(--leaf-angle))}
+  to{transform:translateX(9px) rotate(calc(var(--leaf-angle) + 32deg))}
+}
+@media(prefers-reduced-motion:reduce){.invitation-shell .botanical-drift{display:none}}
+/* A few leaves around the envelope once it opens. */
+.invitation-shell .cover>.botanical-drift{z-index:30;visibility:hidden}
+.invitation-shell .cover:is(.is-opening,.is-open)>.botanical-drift{visibility:visible}
+.invitation-shell .cover:not(.is-opening):not(.is-open) .drifting-leaf,
+.invitation-shell .cover:not(.is-opening):not(.is-open) .drifting-leaf img{animation-play-state:paused}
+.invitation-shell .drifting-petal img{filter:brightness(1.08) saturate(.3) drop-shadow(0 1px 2px #46553a30);animation-duration:6s}
+
+
+/* Reference palette only: ivory, olive, muted foliage, milk white and champagne. */
+:root,
+#site{
+  --wine:#4D5535;--wine-deep:#4D5535;--cream:#F5F0E2;
+  --paper:#FFFCF2;--muted:rgba(255,252,242,.82);--gold:#BEA16A;
+}
+body,.invitation-shell{background-color:#F5F0E2;color:#4D5535}
+.cover{background-color:transparent}
+#site{background-color:transparent;color:#4D5535}
+.cover-kicker,
+.cover.is-opening .cover-kicker-after,
+.cover.is-open .cover-kicker-after{color:#4D5535}
+#site .burgundy-panel,#site .wedding-countdown{
+  background-color:#4D5535;color:#FFFCF2;border-color:#BEA16A80;
+}
+#site .section-title,#site .guestbook-content,#site .footer{color:#4D5535}
+#site .wish-form input,#site .wish-form textarea{
+  color:#4D5535;background-color:#FFFCF2;border-color:#89917180;
+}
+#site .wish-form input::placeholder,#site .wish-form textarea::placeholder{color:#899171}
+#site .wish-submit,#site .gift-teaser button{background-color:#4D5535;color:#FFFCF2}
+#site .magic-button{background-color:#8991711a;color:#4D5535}
+#site .wish-list article,#site .wish-suggestion{background-color:#FFFCF2;color:#4D5535;border-color:#89917155}
+#site .wish-list time{color:#899171}
+#site .rsvp-link{background-color:#F5F0E2;color:#4D5535}
+#site .countdown-unit{background-color:#89917140;border-color:#BEA16A66}
+#site .date-divider,#site .family-divider{background-color:#BEA16A66}
+.album-arrow,.album-dialog,.album-dialog-close,.album-dialog-arrow{background-color:#FFFCF2;color:#4D5535}
+.album-dialog-thumb{border-color:#899171}
+.album-dialog-thumb.is-active{border-color:#BEA16A}
+.site-dialog{background-color:#F5F0E2;color:#4D5535}
+.site-dialog>header,.rsvp-form>button{background-color:#4D5535;color:#FFFCF2}
+.rsvp-form input,.rsvp-form select{color:#4D5535;border-color:#89917180}
+.music-toggle.is-playing{background-color:#4D5535;color:#FFFCF2;border-color:#BEA16A}
+.heart-burst span{color:#BEA16A}
+.heart-rain__heart{color:#C93645}
+#site .wish-submit:focus-visible{outline-color:#4D5535}
+@keyframes wishButtonGlow{
+  0%,100%{box-shadow:0 0 0 1px #BEA16A,0 0 10px #BEA16A66}
+  50%{box-shadow:0 0 0 2px #BEA16A,0 0 18px #BEA16Ab3,0 0 28px #BEA16A59}
+}
+
+/* Consistent olive foliage and warm ivory petals across all botanical decor. */
+:root{--botanical-tone:grayscale(.18) sepia(.16) saturate(.72) hue-rotate(-8deg) brightness(1.03)}
+.invitation-shell #site img:is(.floral-decor,.panel-flower,.timeline-flower,.guestbook-flower,.content-accent,.wedding-botanical-frame3),
+.invitation-shell .cover .envelope-flower,
+.invitation-shell .drifting-leaf img,
+#site .footer::before{
+  filter:var(--botanical-tone);
+}
+
+/* Calibrate each envelope layer to the ceremony panel's #4D5535 paper tone. */
+.invitation-shell .cover .envelope-closed-body{
+  background-color:#4D5535;filter:url("assets/theme/envelope-color-match.svg#closed");
+}
+.invitation-shell .cover .envelope-flap{
+  filter:url("assets/theme/envelope-color-match.svg#closed") drop-shadow(0 5px 4px #4D553580);
+}
+.invitation-shell .cover .envelope-bg{filter:url("assets/theme/envelope-color-match.svg#open-back")}
+.invitation-shell .cover .envelope-cover-art{filter:url("assets/theme/envelope-color-match.svg#open-front")}
+/* A quieter ceremony introduction and a clear, matching address. */
+#site #details .ceremony-info>p.ceremony-location{
+  font-family:"Source Serif 4","Cormorant Garamond",Georgia,serif;
+  font-size:19px;font-weight:400;line-height:1.6;letter-spacing:0;
+}
+#site #details .ceremony-location>span{display:block;font:inherit}
+#site #details .ceremony-location>strong{display:block;margin-top:6px;font:inherit;font-size:20px;font-weight:700;color:inherit}
+
+/* Antique gold divider directly beneath each section heading. */
+#site .panel-title::after,
+#site .section-title::after,
+#site #countdownTitle::after{
+  content:"";display:block;position:relative;left:50%;
+  width:min(360px,100%);height:28px;transform:translateX(-50%);
+  margin:-4px 0 0;pointer-events:none;
+  background:url("assets/theme/Delicate antique gold wedding divider.png") center/100% auto no-repeat;
+}
+
+/* Photo and bouquet rise together and settle at their final coordinates. */
+.invitation-shell .cover{--cover-reveal-rise:clamp(90px,20vw,160px)}
+.invitation-shell .cover:is(.is-opening,.is-open) .envelope-flower{
+  z-index:29;width:75%;left:calc(-30% - 30px);top:-1%;
+  transform:rotate(19deg);
+}
+.invitation-shell .cover.is-opening.is-photo-revealing .envelope-photo-float{
+  opacity:1;animation:coverPhotoRise 1.55s cubic-bezier(.22,.75,.25,1) both;
+}
+.invitation-shell .cover.is-opening.is-decoration-revealing .envelope-flower{
+  opacity:1;animation:coverFlowerRise 1.55s cubic-bezier(.22,.75,.25,1) both;
+}
+@keyframes coverPhotoRise{
+  from{opacity:0;transform:translateY(var(--cover-reveal-rise)) rotate(10deg) scale(.96)}
+  to{opacity:1;transform:translateY(0) rotate(10deg) scale(1)}
+}
+@keyframes coverFlowerRise{
+  from{opacity:0;transform:translateY(var(--cover-reveal-rise)) rotate(19deg) scale(.96)}
+  to{opacity:1;transform:translateY(0) rotate(19deg) scale(1)}
+}
+#site .wish-suggestions .wish-suggestion{font-size:17px;font-weight:700;line-height:1.6;overflow-wrap:break-word}
+#site .wish-list article{font-size:19px;line-height:1.6;overflow-wrap:anywhere}
+#site .wish-list time{font-size:16px}
+
+#site .wish-form{margin-top:16px}
+@media(max-width:650px){#site .wish-form{margin-top:12px}}
+
+/* Mobile fit: preserve decor anchors while keeping flowers clear of the text. */
+@media(max-width:650px){
+  #site .invitation-panel>.panel-flower-left{width:110px}
+  #site .invitation-panel>.ceremony-floral-bottom{width:50px}
+  #site .invitation-panel>.ceremony-floral-right{width:140px}
+  #site .wedding-countdown>.countdown-floral{width:70px}
+  #site .reception-panel>.panel-flower-reception{width:105px}
+  #site .timeline-panel>.timeline-flower{width:90px}
+  #site .guestbook-flower{width:68px}
+  #site .guestbook-paper{width:100%;height:clamp(450px,118vw,470px);max-width:none;object-fit:fill}
+  #site .reception-panel .venue-address{font-size:clamp(9px,4cqi,20px)}
+  .invitation-shell .cover:is(.is-opening,.is-open) .envelope-photo-float{width:60%}
+}
+
+/* Warmer castle linework, slightly clearer on the cream background. */
+.cover-castle{opacity:.21;filter:sepia(.45) saturate(.55) contrast(1.12);mix-blend-mode:multiply}
+
+/* Clear ivory text against the olive information panels. */
+#site .burgundy-panel,#site .wedding-countdown{
+  --paper:#FFFDF5;--muted:#F5F0E2;
+  color:#FFFDF5;background-color:#454D30;
+}
+#site :is(.burgundy-panel,.wedding-countdown) :is(h2,h3,p,small,time,.ceremony-time,.reception-time,.family-grid article>span,.family-grid article>strong,.date-month b,.schedule-pills span,.schedule-pills strong,.countdown-unit strong,.countdown-unit span,.timeline li>time,.timeline li>span:last-child,.directions-link){
+  color:#FFFDF5;text-shadow:0 1px 1px #18201540;
+}
+#site #details .announce,#site #details .family-grid article>strong,
+#site .reception-panel h3,#site .timeline li>span:last-child{font-weight:500}
+#site #details .ceremony-info>small{font-size:15px;line-height:1.6}
+#site .reception-panel .lunar-date{font-size:16px;line-height:1.6}
+#site .reception-panel .venue-address{font-size:clamp(14px,4.6cqi,20px);line-height:1.65}
+#site .reception-panel .venue-address>span{white-space:normal}
+#site .countdown-date{font-size:16px;line-height:1.5}
+#site .countdown-unit span{font-size:15px;font-weight:500}
+#site .timeline li>time,#site .timeline li>span:last-child{font-size:14px;line-height:1.5}
+#site .timeline li{height:auto;min-height:36px}
+#site .countdown-unit{background-color:#89917130;border-color:#BEA16A99}
+
+/* A roomier, legible wedding schedule with aligned columns. */
+#site .timeline-panel{height:auto;max-height:none;padding:34px 20px 40px}
+#site .timeline-panel>.panel-title{margin-bottom:28px}
+#site .timeline{
+  width:100%;max-width:500px;
+  grid-template-columns:minmax(84px,.85fr) 12px minmax(0,1.35fr);
+  column-gap:12px;row-gap:26px;align-items:center;
+}
+#site .timeline li>time{
+  min-width:0;font-size:clamp(18px,2.3vw,21px);font-weight:500;
+  line-height:1.5;letter-spacing:0;gap:6px;padding:0;
+}
+#site .timeline li>time img{flex:0 0 24px;width:24px;height:24px}
+#site .timeline li>span:last-child{
+  min-width:0;font-size:clamp(17px,2.2vw,19px);font-weight:500;
+  line-height:1.6;text-align:left;overflow-wrap:break-word;
+}
+#site .timeline-dot::after{width:9px;height:9px}
+#site .timeline-dot::before{top:50%;bottom:auto;height:calc(100% + 26px)}
+@media(max-width:360px){
+  #site .timeline-panel{padding-inline:14px}
+  #site .timeline{column-gap:9px;grid-template-columns:84px 10px minmax(0,1fr)}
+}
+/* Fine matte paper grain on olive panels, with very soft lighting. */
+#site .burgundy-panel,#site .wedding-countdown{
+  background-image:linear-gradient(135deg,rgba(255,252,242,.045),transparent 45%,rgba(24,32,21,.08)),url("assets/theme/olive-paper-grain.svg");
+  background-size:100% 100%,180px 180px;
+  background-position:center,0 0;
+  background-repeat:no-repeat,repeat;
+}
+#site .invitation-panel::before,
+#site .reception-panel::before,
+#site .timeline-panel::before,
+#site .timeline-paper{opacity:0}
+/* Display the opening portrait without its white frame. */
+.invitation-shell .envelope-photo[src="assets/images/1 (30).jpg"]{border:0}
+
+/* Borderless portraits and album photos in every display state. */
+.invitation-shell .envelope-photo,
+.invitation-shell .album-card,
+.invitation-shell .album-card>img,
+.album-dialog-gallery>img,
+.album-dialog-thumb{border:0}
+.invitation-shell .album-card{background:transparent}
+.invitation-shell .album-card>img{object-fit:contain}
+.invitation-shell .album-card.is-active{box-shadow:0 26px 48px -12px rgba(43,10,15,.48)}
+
+/* Move the nearby cards together and keep the original photo fully visible. */
+.invitation-shell .album-viewer{perspective:1200px;perspective-origin:50% 45%}
+.invitation-shell .album-stack{perspective:none;transform-style:preserve-3d}
+.invitation-shell .album-card{transition:transform 1.05s cubic-bezier(.22,.75,.2,1),opacity .8s ease,box-shadow 1.05s ease;will-change:transform,opacity;box-shadow:0 12px 26px -12px rgba(43,10,15,.26);backface-visibility:hidden}
+.invitation-shell .album-card.is-active{box-shadow:0 30px 50px -18px rgba(43,10,15,.42),0 8px 18px -10px rgba(43,10,15,.2)}
+.invitation-shell .album-card>img,.invitation-shell .album-card.is-active>img{animation:none;transform:none;transition:none}
+@media(prefers-reduced-motion:reduce){.invitation-shell .album-card{transition:none!important}}
+
+/* RSVP: a warm paper invitation with spacious, accessible form controls. */
+.rsvp-dialog{width:min(92vw,520px);max-height:90svh;border:1px solid #d8d8c5;border-radius:24px;background:#fffdf6;color:#4d5535;box-shadow:0 28px 90px #18201255}
+.rsvp-dialog::backdrop{background:#20291ed0;backdrop-filter:blur(7px)}
+.rsvp-dialog>header{position:relative;padding:38px 30px 28px;background:radial-gradient(ellipse at top,#76815b45,transparent 75%),#4d5535;text-align:center;color:#fffdf0}
+.rsvp-eyebrow{display:block;font:500 10px/1.5 var(--sans);letter-spacing:.23em;color:#e5dbb7}
+.rsvp-dialog>header h2{margin:14px 0 10px;font:500 clamp(28px,7vw,36px)/1.15 "Cormorant Garamond",Georgia,serif;letter-spacing:0;color:#fffdf0}
+.rsvp-dialog>header p{max-width:320px;margin:0 auto;font:400 13px/1.7 var(--sans);color:#f4f0dedb}
+.rsvp-date{display:inline-block;margin-top:20px;padding:8px 18px;border-top:1px solid #d9d1ae66;border-bottom:1px solid #d9d1ae66;font:500 12px/1.2 var(--sans);letter-spacing:.23em;color:#e5dbb7}
+.rsvp-dialog .dialog-close{top:10px;right:10px;width:34px;height:34px;background:#ffffff12;color:#fffdf0;cursor:pointer}
+.rsvp-dialog .dialog-close:hover{background:#ffffff28}
+.rsvp-dialog .rsvp-form{gap:18px;padding:28px 30px 20px}
+.rsvp-dialog .rsvp-form label{gap:8px;font:500 13px/1.4 var(--sans);color:#4d5535}
+.rsvp-dialog .rsvp-form input,.rsvp-dialog .rsvp-form select{min-height:48px;padding:12px 14px;border:1px solid #d8dccb;border-radius:10px;background:#faf9f2;color:#3f482f;font:400 14px/1.4 var(--sans);transition:border-color .2s,box-shadow .2s,background .2s;color-scheme:light}
+.rsvp-dialog .rsvp-form input::placeholder{color:#8b907e}
+.rsvp-dialog .rsvp-form input:focus,.rsvp-dialog .rsvp-form select:focus{outline:none;border-color:#718050;box-shadow:0 0 0 3px #71805020;background:#fff}
+.rsvp-dialog .rsvp-form>button{min-height:50px;margin-top:4px;border-radius:12px;background:#4d5535;color:#fffdf0;font:600 12px/1.4 var(--sans);letter-spacing:.13em;box-shadow:0 6px 16px #4d553526;cursor:pointer;transition:background .2s,transform .2s}
+.rsvp-dialog .rsvp-form>button:hover{background:#606d43;transform:translateY(-1px)}
+.rsvp-dialog .rsvp-form>button:disabled{opacity:.6;cursor:wait;transform:none}
+.rsvp-dialog .rsvp-form>button:focus-visible,.rsvp-dialog .dialog-close:focus-visible{outline:2px solid #b6a56a;outline-offset:3px}
+.rsvp-dialog .status{margin:0;text-align:center;font:400 12px/1.6 var(--sans);color:#596545}
+.rsvp-dialog .status:empty{display:none}
+@media(max-width:480px){.rsvp-dialog{border-radius:20px}.rsvp-dialog>header{padding:32px 22px 24px}.rsvp-dialog .rsvp-form{padding:24px 20px;gap:16px}.rsvp-dialog .rsvp-form input,.rsvp-dialog .rsvp-form select{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.rsvp-dialog .rsvp-form>button{transition:none;transform:none}}
+.rsvp-dialog{--sans:"Source Serif 4","Cormorant Garamond",Georgia,serif}
+.rsvp-dialog>header h2{font-family:"Source Serif 4","Cormorant Garamond",Georgia,serif;font-weight:400}
+.rsvp-dialog>header p{font-size:15px}
+.rsvp-dialog .rsvp-form label{font-size:15px}
+.rsvp-dialog .rsvp-form input,.rsvp-dialog .rsvp-form select{font-size:16px}
+.rsvp-dialog .rsvp-form>button{font-size:14px;letter-spacing:.07em}
+.rsvp-dialog .status{font-size:14px}
+.rsvp-dialog>header h2{font-size:clamp(17px,4.8vw,25px);line-height:1.35;white-space:nowrap}
+.rsvp-dialog .rsvp-eyebrow{font-family:'SVN Manchester Park','The Nautigal',cursive;font-size:clamp(15px,4.3vw,24px);font-weight:400;line-height:1.7;letter-spacing:0;white-space:nowrap;text-transform:none}
+.rsvp-dialog .rsvp-date{font-family:"Source Serif 4","Cormorant Garamond",Georgia,serif;font-size:16px;font-weight:400;letter-spacing:.08em;font-variant-numeric:lining-nums}
+.rsvp-dialog .rsvp-eyebrow{display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,12px)}
+.rsvp-rings{display:block;flex:none;width:clamp(28px,7vw,40px);height:30px;object-fit:contain}
+
+/* Phone layout only: retain desktop decor anchors and fit full album images. */
+#site .reception-panel .venue-address-mobile{display:none}
+.footer-mobile-break{display:none}
+@media(max-width:767px){
+  #site .footer p{font-size:clamp(16px,4.8vw,28px);line-height:1.6}
+  #site .footer-line{white-space:nowrap}
+  .footer-mobile-break{display:initial}
+  .invitation-shell .cover:is(.is-opening,.is-open) .envelope-flower{left:calc(-30% + 2.564103vw);width:63.75%;top:calc(-1% + 7.692308vw);transform:rotate(28deg);animation:none}
+  .invitation-shell .cover.is-opening.is-decoration-revealing .envelope-flower{animation:mobileCoverFlowerRise 1.55s cubic-bezier(.22,.75,.25,1) both}
+  @keyframes mobileCoverFlowerRise{from{opacity:0;transform:translateY(var(--cover-reveal-rise)) rotate(28deg) scale(.96)}to{opacity:1;transform:translateY(0) rotate(28deg) scale(1)}}
+  .invitation-shell .cover:is(.is-opening,.is-open) .envelope-photo-float{left:calc(26% + 8.461538vw);top:calc(-6% + 6.410256vw)}
+  .invitation-shell .cover.is-open .envelope-photo-float{transform:rotate(5deg);animation:none}
+  .invitation-shell .cover:is(.is-opening,.is-open) .envelope-photo{transform:none}
+  #site .invitation-panel>.panel-flower-left{top:calc(-8.53% + 5.128205vw);left:-15.14%;right:auto;bottom:auto;width:56.25%;height:auto}
+  #site #details .ceremony-location>span{font-size:clamp(10px,3.1vw,19px);letter-spacing:0;white-space:nowrap}
+  #site .invitation-panel>.ceremony-floral-right{top:calc(30% + 5.128205vw);right:calc(-26% + .512821vw);left:auto;width:54.46%;height:auto;transform:translateY(-50%) rotate(80deg)}
+  #site .invitation-panel>.ceremony-floral-bottom{top:auto;left:auto;right:-4.29%;bottom:-2.56%;width:36.61%;height:auto}
+  #site .wedding-countdown>.countdown-floral{top:0;right:-10.68%;bottom:0;left:auto;width:27.59%;height:100%}
+  #site .album-floral-left,#site .album-floral-right{top:auto;bottom:2.11%;width:23.89%;height:auto}
+  #site .album-floral-left{left:1%;right:auto}
+  #site .album-floral-right{right:1%;left:auto}
+  #site .reception-panel>.panel-flower-reception{top:auto;right:auto;left:-17%;bottom:-.28%;width:41.07%;height:auto}
+  #site .reception-panel>.panel-flower-reception-right{--reception-leaf-inset:7.14%}
+  #site .timeline-panel>.timeline-flower{top:auto;left:auto;right:-8.93%;bottom:20.3%;width:36.61%;height:auto}
+  #site .guestbook-flower{top:auto;right:auto;left:-5%;bottom:37.3%;width:22.78%;height:auto;max-width:none;z-index:3;pointer-events:none}
+  .invitation-shell #site .album-viewer{width:100%;max-width:420px;height:clamp(270px,85vw,380px);margin-inline:auto}
+  .invitation-shell #site .album-card{width:82%;height:88%;max-width:82%;max-height:88%;min-width:0;box-sizing:border-box}
+  .invitation-shell #site .album-card>img{width:100%;height:100%;object-fit:contain;object-position:center}
+  #site .album-thumbs{max-width:100%;flex-wrap:wrap;row-gap:10px;padding-inline:12px}
+  #site .reception-panel>.panel-title{width:100%;max-width:100%;margin-inline:auto;font-size:clamp(14px,4.2vw,24px);white-space:nowrap;letter-spacing:0}
+  #site .timeline-panel>.panel-title{font-size:clamp(14px,4.2vw,24px);white-space:nowrap;letter-spacing:0;text-align:center}
+  #site .timeline{grid-template-columns:70px 9px minmax(0,1fr);column-gap:7px;row-gap:22px}
+  #site .timeline-panel{container-type:inline-size}
+  #site .timeline li>time{font-size:clamp(13px,5.4cqi,18px);white-space:nowrap;gap:4px}
+  #site .timeline li>time img{flex-basis:20px;width:20px;height:20px}
+  #site .timeline li>span:last-child{font-size:clamp(12px,5.1cqi,18px);white-space:nowrap;overflow-wrap:normal;letter-spacing:0}
+  #site .timeline-dot::before{height:calc(100% + 22px)}
+  #site .reception-panel>h3{font-size:clamp(12px,3.6vw,20px);white-space:nowrap;letter-spacing:0}
+  #site .reception-panel .lunar-date{font-size:clamp(10px,3.1vw,16px);white-space:nowrap;letter-spacing:0}
+  #site .reception-panel .venue-address{position:relative;top:-6px;font-size:clamp(12px,5.8cqi,22px);line-height:1.7;letter-spacing:0}
+  #site .reception-panel .venue-address-desktop{display:none}
+  #site .reception-panel .venue-address-mobile{display:block}
+  #site .reception-panel .venue-address>span{display:block;white-space:nowrap}
+}
