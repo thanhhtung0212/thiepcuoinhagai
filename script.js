@@ -1,5 +1,5 @@
 const CONFIG = {
-  photos: Array.from({ length: 28 }, (_, index) => `assets/images/${index + 1}.jpg`)
+  photos: Array.from({ length: 22 }, (_, index) => `assets/images/${index + 1}.jpg`)
 };
 
 if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
@@ -273,6 +273,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showPhoto(index) {
+    // Read layout once before updating cards to avoid repeated forced layouts.
+    const spacing = albumViewer.clientWidth * .30;
     photoIndex = (index + CONFIG.photos.length) % CONFIG.photos.length;
     albumCount.textContent = `${photoIndex + 1} / ${CONFIG.photos.length}`;
     albumThumbs.querySelectorAll("button").forEach((button, i) => {
@@ -291,7 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const slot = Math.max(-3, Math.min(3, offset));
       const depth = Math.abs(slot);
       const scale = distance === 0 ? 1 : Math.max(.8, 1 - depth * .07);
-      const spacing = albumViewer.clientWidth * .30;
       const wasDistant = Math.abs(Number(card.dataset.albumOffset ?? offset)) > 2;
       card.style.transition = wasDistant && distance > 2 ? "none" : "";
       card.dataset.albumOffset = String(offset);
@@ -299,6 +300,12 @@ document.addEventListener("DOMContentLoaded", () => {
       card.style.opacity = distance > 2 ? "0" : String(1 - distance * .22);
       card.style.pointerEvents = distance > 2 ? "none" : "";
       card.style.zIndex = String(100 - distance);
+      // Warm the next cards before they enter the visible stack.
+      const image = card.querySelector("img");
+      if (distance <= 3 && image.loading !== "eager") {
+        image.loading = "eager";
+        if (image.decode) image.decode().catch(() => {});
+      }
       card.classList.toggle("is-active", offset === 0);
       card.setAttribute("aria-hidden", offset === 0 ? "false" : "true");
     });
@@ -326,6 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
     photo.src = src;
     photo.alt = `Ảnh cưới Thanh Tùng và Minh Ngọc ${index + 1}`;
     photo.loading = "lazy";
+    photo.decoding = "async";
     photo.addEventListener("load", () => {
       const ratio = photo.naturalWidth / photo.naturalHeight;
       if (ratio > 0) card.style.aspectRatio = String(ratio);
@@ -398,7 +406,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   albumViewer.addEventListener("mouseenter", () => { albumIsHovered = true; updateAlbumAutoplay(); });
   albumViewer.addEventListener("mouseleave", () => { albumIsHovered = false; updateAlbumAutoplay(); });
-  reducedMotion.addEventListener("change", updateAlbumAutoplay);
+  if (reducedMotion.addEventListener) reducedMotion.addEventListener("change", updateAlbumAutoplay);
+  else reducedMotion.addListener(updateAlbumAutoplay);
   if ("IntersectionObserver" in window) {
     const albumObserver = new IntersectionObserver(entries => {
       albumIsVisible = entries.some(entry => entry.isIntersecting);
@@ -424,9 +433,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const rsvpForm = document.getElementById("rsvpForm");
   const rsvpStatus = document.getElementById("rsvpStatus");
   const rsvpSubmitButton = rsvpForm.querySelector('button[type="submit"]');
-  document.getElementById("openRsvp").addEventListener("click", () => rsvpDialog.showModal());
+  document.getElementById("openRsvp").addEventListener("click", () => {
+    rsvpDialog.showModal();
+    // Keep focus in the opening tap so iOS can activate the keyboard.
+    rsvpForm.elements.namedItem("name").focus({ preventScroll: true });
+  });
   document.getElementById("closeRsvp").addEventListener("click", () => rsvpDialog.close());
-  rsvpDialog.addEventListener("click", event => { if (event.target === rsvpDialog) rsvpDialog.close(); });
+  rsvpDialog.addEventListener("click", event => {
+    if (event.target !== rsvpDialog) return;
+    const bounds = rsvpDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right ||
+        event.clientY < bounds.top || event.clientY > bounds.bottom) rsvpDialog.close();
+  });
   rsvpForm.addEventListener("submit", event => {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.target).entries());

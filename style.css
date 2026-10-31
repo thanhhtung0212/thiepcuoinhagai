@@ -2110,8 +2110,9 @@ body,.invitation-shell{background-color:#F5F0E2;color:#4D5535}
 /* Move the nearby cards together and keep the original photo fully visible. */
 .invitation-shell .album-viewer{perspective:1200px;perspective-origin:50% 45%}
 .invitation-shell .album-stack{perspective:none;transform-style:preserve-3d}
-.invitation-shell .album-card{transition:transform 1.05s cubic-bezier(.22,.75,.2,1),opacity .8s ease,box-shadow 1.05s ease;will-change:transform,opacity;box-shadow:0 12px 26px -12px rgba(43,10,15,.26);backface-visibility:hidden}
-.invitation-shell .album-card.is-active{box-shadow:0 30px 50px -18px rgba(43,10,15,.42),0 8px 18px -10px rgba(43,10,15,.2)}
+.invitation-shell .album-card{transition:transform .65s cubic-bezier(.22,.68,.2,1),opacity .65s cubic-bezier(.22,.68,.2,1);will-change:transform,opacity;box-shadow:0 12px 26px -12px rgba(43,10,15,.26);filter:none;backface-visibility:hidden}
+.invitation-shell .album-card.is-active{box-shadow:0 12px 26px -12px rgba(43,10,15,.26);filter:none}
+.invitation-shell .album-card.is-active::after{animation:none;opacity:0}
 .invitation-shell .album-card>img,.invitation-shell .album-card.is-active>img{animation:none;transform:none;transition:none}
 @media(prefers-reduced-motion:reduce){.invitation-shell .album-card{transition:none!important}}
 
@@ -2175,7 +2176,7 @@ body,.invitation-shell{background-color:#F5F0E2;color:#4D5535}
   #site .reception-panel>.panel-flower-reception{top:auto;right:auto;left:-17%;bottom:-.28%;width:41.07%;height:auto}
   #site .reception-panel>.panel-flower-reception-right{--reception-leaf-inset:7.14%}
   #site .timeline-panel>.timeline-flower{top:auto;left:auto;right:-8.93%;bottom:20.3%;width:36.61%;height:auto}
-  #site .guestbook-flower{top:auto;right:auto;left:-5%;bottom:37.3%;width:22.78%;height:auto;max-width:none;z-index:3;pointer-events:none}
+  #site .guestbook-flower{top:auto;right:auto;left:-2%;bottom:37.3%;width:22.78%;height:auto;max-width:none;z-index:3;pointer-events:none}
   .invitation-shell #site .album-viewer{width:100%;max-width:420px;height:clamp(270px,85vw,380px);margin-inline:auto}
   .invitation-shell #site .album-card{width:82%;height:88%;max-width:82%;max-height:88%;min-width:0;box-sizing:border-box}
   .invitation-shell #site .album-card>img{width:100%;height:100%;object-fit:contain;object-position:center}
@@ -2220,6 +2221,9 @@ body,.invitation-shell{background-color:#F5F0E2;color:#4D5535}
 #site .guestbook-content .wish-form{width:100%;max-width:340px;margin-top:24px}
 #site .guestbook-content .wish-list{width:100%;max-width:340px}
 #site .guestbook-section>.guestbook-flower{z-index:1}
+@media(min-width:768px){
+  #site .guestbook-section>.guestbook-flower{left:10%}
+}
 
 
 /* Shared phone/tablet rules: Safari, Chrome and Samsung Internet. */
@@ -2279,4 +2283,24 @@ body,.invitation-shell{background-color:#F5F0E2;color:#4D5535}
   #site #details .family-grid article:last-child{grid-column:3}
   #site #details .family-grid article>strong{width:100%;font-size:clamp(12px,3.5vw,15px);text-align:center}
   #site #details .family-divider{display:block;grid-column:2;grid-row:1 / span 3;height:100%;min-height:0}
+}
+
+/* Preserve the portrait QR images and fit the dialog to the viewport. */
+.site-dialog.gift-dialog{box-sizing:border-box;inset:0;width:min(600px,calc(100% - 24px));max-width:600px;height:fit-content;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);margin:auto;border-radius:16px;overflow:auto;overscroll-behavior:contain}
+.gift-dialog .gift-accounts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding:24px;align-items:start}
+.gift-dialog .gift-accounts article{width:100%;min-width:0;max-width:none}
+.gift-dialog .gift-accounts h3{min-height:32px;font-size:13px}
+.gift-dialog .gift-qr{width:100%;max-width:240px;height:auto;aspect-ratio:2 / 3;object-fit:contain;margin-bottom:12px}
+.gift-dialog .gift-accounts p,.gift-dialog .gift-accounts strong{font-size:12px;line-height:1.5}
+.gift-dialog .gift-accounts button{padding:9px 18px;font-size:12px}
+.rsvp-dialog{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px)}
+.rsvp-dialog[open]{display:flex;flex-direction:column;overflow:hidden}
+.rsvp-dialog>header{flex:none}
+.rsvp-dialog .rsvp-form{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.rsvp-dialog .rsvp-form input,.rsvp-dialog .rsvp-form select{touch-action:manipulation}
+.rsvp-dialog .rsvp-form input{-webkit-user-select:text;user-select:text}
+@media(max-width:480px){
+  .gift-dialog .gift-accounts{grid-template-columns:minmax(0,1fr);gap:28px;padding:20px}
+  .gift-dialog .gift-accounts article{max-width:260px;margin-inline:auto}
+  .gift-dialog .gift-accounts h3{min-height:0;margin-bottom:12px}
 }
