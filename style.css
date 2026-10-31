@@ -2267,7 +2267,7 @@ body,.invitation-shell{background-color:#F5F0E2;color:#4D5535}
 @media(max-width:600px){
   #site .couple-introduction__portraits{grid-template-columns:minmax(0,1fr);gap:48px;max-width:320px}
   #site .couple-person{width:100%;margin-inline:auto}
-  #site .couple-person h3{font-size:clamp(24px,8cqi,30px);white-space:normal;text-wrap:balance}
+  #site .couple-person h3{font-size:min(30px,8cqi);white-space:nowrap;text-wrap:nowrap}
   #site .couple-person__role{margin-top:28px}
   #site .couple-introduction__ampersand{position:static;transform:none;display:block;margin:-12px auto;font-size:32px}
 }
