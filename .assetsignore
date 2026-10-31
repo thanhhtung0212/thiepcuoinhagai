@@ -1,0 +1,9 @@
+.git
+.github
+worker.js
+wrangler.jsonc
+*.php
+*.ps1
+*.md
+HUONG-DAN.txt
+wishes/
