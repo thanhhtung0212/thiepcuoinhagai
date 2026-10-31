@@ -445,76 +445,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.clientX < bounds.left || event.clientX > bounds.right ||
         event.clientY < bounds.top || event.clientY > bounds.bottom) rsvpDialog.close();
   });
-  rsvpForm.addEventListener("submit", event => {
+  let rsvpSending = false;
+  rsvpForm.addEventListener("submit", async event => {
     event.preventDefault();
-    const data = Object.fromEntries(new FormData(event.target).entries());
-    const attendance = data.attendance.startsWith("Có")
-      ? "Có, tôi sẽ tới đó"
-      : "Rất tiếc, tôi không thể tham dự";
-    const responseFrame = document.createElement("iframe");
-    responseFrame.name = `rsvp-response-${Date.now()}`;
-    responseFrame.title = "Gửi xác nhận tham dự";
-    responseFrame.hidden = true;
-    responseFrame.setAttribute("aria-hidden", "true");
-
-    const submissionForm = document.createElement("form");
-    submissionForm.method = "POST";
-    submissionForm.action = "https://docs.google.com/forms/d/e/1FAIpQLSeLOwl5-elRvvJNoZNJfN0lYnCpibcLrBGTS0AV_LBpoD0gZQ/formResponse";
-    submissionForm.target = responseFrame.name;
-    submissionForm.hidden = true;
-    [
-      ["fvv", "1"],
-      ["pageHistory", "0"],
-      ["entry.559352220", data.name.trim()],
-      ["entry.877086558", attendance],
-      ["entry.877086558_sentinel", ""],
-      ["entry.924523986", data.guests.replace(/\D/g, "")],
-      ["entry.1647591272", data.guestSide]
-    ].forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      submissionForm.appendChild(input);
-    });
-
-    rsvpStatus.textContent = "Đang gửi xác nhận...";
+    if (rsvpSending || !rsvpForm.reportValidity()) return;
+    rsvpSending = true;
     rsvpSubmitButton.disabled = true;
-    let hasSubmitted = false;
-    let isComplete = false;
-    const timeout = window.setTimeout(() => {
-      if (isComplete) return;
-      isComplete = true;
-      rsvpStatus.textContent = "Chưa nhận được phản hồi từ Google Forms. Vui lòng kiểm tra kết nối và thử lại.";
-      rsvpSubmitButton.disabled = false;
-      submissionForm.remove();
-      responseFrame.remove();
-    }, 20000);
-
-    responseFrame.addEventListener("load", () => {
-      if (!hasSubmitted) {
-        hasSubmitted = true;
-        try {
-          submissionForm.submit();
-        } catch (error) {
-          window.clearTimeout(timeout);
-          isComplete = true;
-          rsvpStatus.textContent = `Không thể gửi xác nhận: ${error.message}`;
-          rsvpSubmitButton.disabled = false;
-          submissionForm.remove();
-          responseFrame.remove();
-        }
-        return;
-      }
-      if (isComplete) return;
-      isComplete = true;
-      window.clearTimeout(timeout);
+    rsvpStatus.textContent = "Đang gửi xác nhận...";
+    try {
+      const data = Object.fromEntries(new FormData(rsvpForm).entries());
+      const response = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Accept": "application/json"},
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) throw new Error(result.error || "Chưa xác minh được Google Forms đã ghi nhận.");
       rsvpStatus.textContent = "Cám ơn bạn đã là 1 phần quan trọng trong ngày trọng đại của chúng tôi ♥";
+      rsvpSubmitButton.textContent = "ĐÃ GỬI XÁC NHẬN";
+      // Keep disabled after success to prevent accidental duplicate responses.
+    } catch (error) {
+      rsvpStatus.textContent = error.message || "Không thể gửi xác nhận. Vui lòng kiểm tra kết nối.";
       rsvpSubmitButton.disabled = false;
-      submissionForm.remove();
-      responseFrame.remove();
-    });
-    document.body.append(responseFrame, submissionForm);
+    } finally {
+      rsvpSending = false;
+    }
   });
   const wishForm = document.getElementById("wishForm");
   const wishList = document.getElementById("wishList");
