@@ -1,0 +1,23 @@
+{
+  "name": "thiepcuoi",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-31",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/wishes/api.php"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "thiepcuoi-wishes",
+      "database_id": "12114c56-5f3c-41b9-a779-5123e9ca91a0"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
