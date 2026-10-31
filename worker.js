@@ -61,10 +61,9 @@ async function handleRsvp(request) {
   let input;
   try { input = JSON.parse(new TextDecoder().decode(bytes)); } catch { return json({error: "JSON không hợp lệ."}, 400); }
   const name = typeof input?.name === "string" ? input.name.trim() : "";
-  const attending = input?.attendance === "Có, tôi sẽ tham dự";
   const guests = typeof input?.guests === "string" ? input.guests.replace(/ người$/, "") : "";
   if (!name || [...name].length > 120 ||
-      !["Có, tôi sẽ tham dự", "Rất tiếc, tôi không thể tham dự"].includes(input?.attendance) ||
+      !["Có, tôi sẽ tới đó", "Có, chắc chắn rồi"].includes(input?.attendance) ||
       !["1","2","3","4","5","6"].includes(guests) ||
       !["Nhà Trai","Nhà Gái"].includes(input?.guestSide)) {
     return json({error: "Vui lòng điền đầy đủ thông tin hợp lệ."}, 422);
@@ -72,7 +71,7 @@ async function handleRsvp(request) {
   const payload = new URLSearchParams({
     "fvv": "1", "pageHistory": "0",
     "entry.559352220": name,
-    "entry.877086558": attending ? "Có, tôi sẽ tới đó" : "Rất tiếc, tôi không thể tham dự",
+    "entry.877086558": input.attendance,
     "entry.877086558_sentinel": "",
     "entry.924523986": guests,
     "entry.1647591272": input.guestSide
