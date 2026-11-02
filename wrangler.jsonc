@@ -1,5 +1,5 @@
 {
-  "name": "thiepcuoi",
+  "name": "thiepmoi",
   "main": "worker.js",
   "compatibility_date": "2026-10-31",
   "workers_dev": true,
@@ -14,8 +14,8 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "thiepcuoi-wishes",
-      "database_id": "12114c56-5f3c-41b9-a779-5123e9ca91a0"
+      "database_name": "thiepmoi-wishes",
+      "database_id": "b5166595-d9ba-4438-98a3-b766c1122342"
     }
   ],
   "observability": {
