@@ -1604,7 +1604,7 @@ body{background:#fff;color:var(--wine)}
 }
 
 /* Double the upper-left flower in the ceremony panel. */
-#site .invitation-panel>.panel-flower-left{width:clamp(207px,46.8vw,315px)}
+#site .invitation-panel>.panel-flower-left{width:clamp(165.6px,37.44vw,252px)}
 @media(max-width:650px){#site .invitation-panel>.panel-flower-left{width:201.6px}}
 /* Shift the upper-left ceremony flower 3% farther left. */
 #site .invitation-panel>.panel-flower-left{left:calc(-68px - 3%)}
@@ -2165,7 +2165,7 @@ body,.invitation-shell{background-color:#F5F0E2;color:#4D5535}
   .invitation-shell .cover:is(.is-opening,.is-open) .envelope-photo-float{left:calc(26% + 8.461538vw);top:calc(-6% + 6.410256vw)}
   .invitation-shell .cover.is-open .envelope-photo-float{transform:rotate(5deg);animation:none}
   .invitation-shell .cover:is(.is-opening,.is-open) .envelope-photo{transform:none}
-  #site .invitation-panel>.panel-flower-left{top:calc(-8.53% + 5.128205vw);left:-15.14%;right:auto;bottom:auto;width:56.25%;height:auto}
+  #site .invitation-panel>.panel-flower-left{top:calc(-8.53% + 5.128205vw);left:-15.14%;right:auto;bottom:auto;width:45%;height:auto}
   #site #details .ceremony-location>span{font-size:clamp(10px,3.1vw,19px);letter-spacing:0;white-space:nowrap}
   #site .invitation-panel>.ceremony-floral-right{top:calc(30% + 5.128205vw);right:calc(-26% + .512821vw);left:auto;width:54.46%;height:auto;transform:translateY(-50%) rotate(80deg)}
   #site .invitation-panel>.ceremony-floral-bottom{top:auto;left:auto;right:-4.29%;bottom:-2.56%;width:36.61%;height:auto}
