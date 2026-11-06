@@ -27,14 +27,14 @@ button,input,select,textarea{font:inherit}button,a{cursor:pointer}button{color:i
 @keyframes waxSealPulse{0%,100%{opacity:.3;filter:brightness(.95);transform:translate(-50%,-50%) scale(.94)}50%{opacity:.9;filter:brightness(1.3);transform:translate(-50%,-50%) scale(1.06)}}
 .envelope-bg,.envelope-cover-art{position:absolute;inset:0;display:block;width:100%;max-width:none;pointer-events:none}
 .envelope-bg{z-index:10;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
-.envelope-closed-body{position:absolute;z-index:15;inset:0;background:#304018 url("assets/theme/envelope-closed-olive-champagne-v2.png") center/107% 120% no-repeat;box-shadow:0 0 0 1px #510c1b35;transition:opacity .8s ease}
-.envelope-closed-body:after{position:absolute;right:auto;bottom:-2%;left:-7%;width:76%;height:80%;background:url("assets/theme/envelope-calla-elegant-pair.png") left bottom/contain no-repeat;opacity:.94;filter:drop-shadow(0 2px 4px #26080e35);content:"";pointer-events:none}
+.envelope-closed-body{position:absolute;z-index:15;inset:0;background:#304018 url("assets/theme/envelope-closed-olive-champagne-v2.webp") center/107% 120% no-repeat;box-shadow:0 0 0 1px #510c1b35;transition:opacity .8s ease}
+.envelope-closed-body:after{position:absolute;right:auto;bottom:-2%;left:-7%;width:76%;height:80%;background:url("assets/theme/envelope-calla-elegant-pair.webp") left bottom/contain no-repeat;opacity:.94;filter:drop-shadow(0 2px 4px #26080e35);content:"";pointer-events:none}
 .envelope-photo-float{position:absolute;z-index:20;top:-2%;left:33%;width:64%;opacity:0;animation:drFloat 6.5s ease-in-out .4s infinite;transition:opacity .45s ease;will-change:transform}
 .envelope-photo-placeholder{display:grid;width:100%;aspect-ratio:221/309;place-items:center;transform:rotate(12deg);border:7px solid #fff;background:linear-gradient(145deg,#f8f5ef,#e5d8ca);box-shadow:2px 2px 4px #0004;color:#937b68;font:400 10px var(--sans);letter-spacing:.16em}
 .envelope-photo{display:block;width:100%;aspect-ratio:221/309;object-fit:cover;transform:rotate(12deg);border:7px solid #fff;box-shadow:2px 2px 8px #0004}
 .envelope-flower{position:absolute;z-index:25;top:-12%;left:-2%;width:42%;max-width:none;object-fit:contain;opacity:0;transform:rotate(-17deg);filter:drop-shadow(3px 4px 3px #0005);animation:drFloat 5s ease-in-out infinite;transition:opacity .45s ease;pointer-events:none}
 .envelope-cover-art{display:none}
-.envelope-flap{position:absolute;z-index:40;top:0;left:0;width:100%;height:53%;clip-path:polygon(0 0,0% 0,50% 0%);background-image:url("assets/theme/envelope-closed-olive-champagne-v2.png");background-position:top center;background-repeat:no-repeat;background-size:100% 188.68%;filter:drop-shadow(0 5px 4px #25070d80);transform-origin:50% 0;backface-visibility:hidden;transition:transform .9s cubic-bezier(.35,.05,.2,1),opacity .25s ease;pointer-events:none}
+.envelope-flap{position:absolute;z-index:40;top:0;left:0;width:100%;height:53%;clip-path:polygon(0 0,0% 0,50% 0%);background-image:url("assets/theme/envelope-closed-olive-champagne-v2.webp");background-position:top center;background-repeat:no-repeat;background-size:100% 188.68%;filter:drop-shadow(0 5px 4px #25070d80);transform-origin:50% 0;backface-visibility:hidden;transition:transform .9s cubic-bezier(.35,.05,.2,1),opacity .25s ease;pointer-events:none}
 .cover.is-opening .envelope-flap{transform:perspective(700px) rotateX(180deg)}
 .cover.is-opening .envelope-bg,.cover.is-open .envelope-bg{top:auto;bottom:0;height:auto;object-fit:contain;object-position:center bottom;opacity:1}
 .cover.is-opening .envelope-closed-body,.cover.is-open .envelope-closed-body{opacity:0}
@@ -189,7 +189,7 @@ button,input,select,textarea{font:inherit}button,a{cursor:pointer}button{color:i
 /* Keep the floral image visible above the later countdown color overrides. */
 .wedding-countdown{
   background-color:#46553a;
-  background-image:linear-gradient(rgba(48,64,24,.62),rgba(48,64,24,.62)),url("assets/theme/Elegant Calla Lily Corner Frame.png");
+  background-image:linear-gradient(rgba(48,64,24,.62),rgba(48,64,24,.62)),url("assets/theme/Elegant Calla Lily Corner Frame.webp");
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
@@ -286,7 +286,7 @@ button,input,select,textarea{font:inherit}button,a{cursor:pointer}button{color:i
   z-index:0;
   inset:0;
   border-radius:inherit;
-  background:url("assets/theme/Elegant Calla Lily Corner Frame.png") center/cover no-repeat;
+  background:url("assets/theme/Elegant Calla Lily Corner Frame.webp") center/cover no-repeat;
   content:"";
   opacity:.28;
   mix-blend-mode:screen;
@@ -301,7 +301,7 @@ button,input,select,textarea{font:inherit}button,a{cursor:pointer}button{color:i
   display:block!important;
 }
 .wedding-countdown{
-  background-image:linear-gradient(rgba(48,64,24,.62),rgba(48,64,24,.62)),url("assets/theme/Elegant Calla Lily Corner Frame.png");
+  background-image:linear-gradient(rgba(48,64,24,.62),rgba(48,64,24,.62)),url("assets/theme/Elegant Calla Lily Corner Frame.webp");
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
@@ -1463,7 +1463,7 @@ body{background:#fff;color:var(--wine)}
 /* Final countdown background image override. */
 .wedding-countdown{
   background-color:#46553a;
-  background-image:linear-gradient(rgba(48,64,24,.62),rgba(48,64,24,.62)),url("assets/theme/Elegant Calla Lily Corner Frame.png");
+  background-image:linear-gradient(rgba(48,64,24,.62),rgba(48,64,24,.62)),url("assets/theme/Elegant Calla Lily Corner Frame.webp");
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
@@ -1710,7 +1710,7 @@ body{background:#fff;color:var(--wine)}
 #site .footer{isolation:isolate;min-height:240px;display:grid;place-items:center;padding:40px 18px;transform:translateY(10%);margin-bottom:48px}
 #site .footer::before{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:url("assets/theme/Elegant Botanical Wedding Clipart Collection new 6.png") center/contain no-repeat;
+  background:url("assets/theme/Elegant Botanical Wedding Clipart Collection new 6.webp") center/contain no-repeat;
   transform:translateY(10%);
   opacity:.46;
 }
@@ -1993,7 +1993,7 @@ body,.invitation-shell{background-color:#F5F0E2;color:#4D5535}
   content:"";display:block;position:relative;left:50%;
   width:min(360px,100%);height:28px;transform:translateX(-50%);
   margin:-4px 0 0;pointer-events:none;
-  background:url("assets/theme/Delicate antique gold wedding divider.png") center/100% auto no-repeat;
+  background:url("assets/theme/Delicate antique gold wedding divider.webp") center/100% auto no-repeat;
 }
 
 /* Photo and bouquet rise together and settle at their final coordinates. */

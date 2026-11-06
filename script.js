@@ -1,5 +1,5 @@
 const CONFIG = {
-  photos: Array.from({ length: 22 }, (_, index) => `assets/images/${index + 1}.jpg`)
+  photos: Array.from({ length: 22 }, (_, index) => `assets/images/${index + 1}.webp`)
 };
 
 if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
@@ -54,41 +54,41 @@ function startHeartRain() {
 function addDriftingLeaves() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const assets = [
-    "assets/theme/decor/Calla Lily Wedding Bouquet Clipart Collection 24.png",
-    "assets/theme/decor/Calla Lily Wedding Bouquet Clipart Collection 25.png",
-    "assets/theme/decor/Calla Lily Wedding Bouquet Clipart Collection 26.png",
-    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 11.png",
-    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 13 - Copy.png",
-    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 13.png",
-    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 14.png",
-    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 15.png",
-    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 17.png",
-    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 18.png",
-    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 20.png",
-    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 4.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (10) - Copy - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (10) - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (11) - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (12) - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (3).png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (4) - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (4).png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (5) - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (5).png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (6) - Copy - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (6) - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (6).png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (7) - Copy - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (7) - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (7).png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (8) - Copy - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (8) - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (8).png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (9) - Copy - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (9) - Copy.png",
-    "assets/theme/decor/generated-image-77907d57e59e - Copy.png",
-    "assets/theme/decor/White Calla Lily Clipart Collection - Copy - Copy - Copy - Copy.png",
-    "assets/theme/decor/White Calla Lily Clipart Collection - Copy - Copy - Copy.png"
+    "assets/theme/decor/Calla Lily Wedding Bouquet Clipart Collection 24.webp",
+    "assets/theme/decor/Calla Lily Wedding Bouquet Clipart Collection 25.webp",
+    "assets/theme/decor/Calla Lily Wedding Bouquet Clipart Collection 26.webp",
+    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 11.webp",
+    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 13 - Copy.webp",
+    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 13.webp",
+    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 14.webp",
+    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 15.webp",
+    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 17.webp",
+    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 18.webp",
+    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 20.webp",
+    "assets/theme/decor/Elegant Botanical Wedding Clipart Collection new 4.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (10) - Copy - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (10) - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (11) - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (12) - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (3).webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (4) - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (4).webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (5) - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (5).webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (6) - Copy - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (6) - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (6).webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (7) - Copy - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (7) - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (7).webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (8) - Copy - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (8) - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (8).webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (9) - Copy - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy - Copy (9) - Copy.webp",
+    "assets/theme/decor/generated-image-77907d57e59e - Copy.webp",
+    "assets/theme/decor/White Calla Lily Clipart Collection - Copy - Copy - Copy - Copy.webp",
+    "assets/theme/decor/White Calla Lily Clipart Collection - Copy - Copy - Copy.webp"
 ];
   const sections = document.querySelectorAll(".cover, #site>section, #site>footer");
   const count = window.matchMedia("(max-width:650px)").matches ? 4 : 6;
