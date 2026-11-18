@@ -1,5 +1,5 @@
 const CONFIG = {
-  photos: Array.from({ length: 22 }, (_, index) => `assets/images/${index + 1}.webp`)
+  photos: Array.from({ length: 22 }, (_, index) => `assets/images/album/${index + 1}.jpg`)
 };
 
 if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
